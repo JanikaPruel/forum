@@ -7,7 +7,7 @@
         "read_time": 30,
         "max_header_mb": 20
     },
-    "loger": {
+    "logger": {
         "level": -4,
         "source_key": true,
         "output": "stdout",
