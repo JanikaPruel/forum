@@ -1,5 +1,8 @@
 .SILENT:
 
+include .env
+export
+
 .PHONY: fmt lint test race run scripts build_docker_image remove_container_and_image
 
 fmt:
