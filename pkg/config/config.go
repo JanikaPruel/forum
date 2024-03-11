@@ -1,6 +1,9 @@
 package config
 
-import "time"
+import (
+	"forum/pkg/serror"
+	"time"
+)
 
 // default constants
 const (
@@ -48,12 +51,41 @@ type (
 )
 
 // InitConfig ...
-func InitConfig(cfg *Config, err error) {
+func InitConfig(cfg *Config) (*Config, error) {
 	// setup
+
+	// someVariable := "some"
+
+	// process := []byte{}
+
+	// env - process
+
+	// user space
+
+	//system - root -$PATH - exec : .env
+	cfg, err := setup(cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return cfg, nil
+
+}
+
+// Переменная окружения — это переменная, значение которой используется операционной системой или приложениями для конфигурации работы программного обеспечения в конкретной среде.
+func setup(cfg *Config) (cnfg *Config, err error) {
 	//setup method <
+	if cfg == nil {
+		return nil, serror.ErrConfigStructureIsNill
+	}
+
 	// parsing
-	// json, validatation
+	// .env ^^^, json, config constants, -> validatation
 	// set conf paras
 	// or populate defaults
 
 }
+
+// config, logger,model -> entity, repository. connection to database, query
+
+// || server, router, meddleware, auth
