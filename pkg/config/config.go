@@ -29,6 +29,9 @@ const (
 	// milisecond= 1000 micro
 	// second = 1000
 	// minute = 60
+
+	// database
+	defaultDatabaseFilePath = "./database/forum.db"
 )
 
 // Config structure
@@ -49,10 +52,15 @@ type (
 		Handler   string `json:"handler"`
 	}
 
+	DBConfig struct {
+		DatabaseFilePath string `json:"database_file_path"`
+	}
+
 	Config struct {
 		ServiceName  string `json:"service_name"`
 		HTTPServer   `json:"http_server"`
 		LoggerConfig `json:"logger"`
+		DBConfig     `json:"database,omitempty"`
 	}
 )
 
@@ -162,6 +170,8 @@ func populateDefaults(cfg *Config) {
 	cfg.LoggerConfig.SourceKey = defaultLoggerSourceKey
 	cfg.LoggerConfig.Output = defaultLoggerOutput
 	cfg.LoggerConfig.Handler = defaultLoggerHandler
+	cfg.DBConfig.DatabaseFilePath = defaultDatabaseFilePath
+
 }
 
 // config, logger,model -> entity, repository. connection to database, query
