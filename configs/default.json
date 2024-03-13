@@ -1,4 +1,6 @@
 {
+    "service_name": "forum",
+
     "http_server": {
         "host": "localhost",
         "port": "8080",
@@ -12,6 +14,8 @@
         "source_key": true,
         "output": "stdout",
         "handler": "json"
+    },
+    "database": {
+        "database_file_path": "./database/forum.db"
     }
-    
 }
