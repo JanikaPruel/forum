@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"forum/internal/app"
 	"forum/pkg/config"
 	"forum/pkg/logger"
@@ -13,13 +14,15 @@ func main() {
 	// InitConfig
 	cfg, err := config.InitConfig()
 	if err != nil {
-		slog.Error("Ny vse priehali davai zanovo init config")
+		slog.Error(err.Error())
+		return
 	}
 
 	// Logger
 	_, err = logger.InitLogger(cfg) // cfg = nil
 	if err != nil {
-		slog.Error("Ny vse priehali davai zanovo logger config")
+		slog.Error(err.Error())
+		return
 	}
 
 	// Debug log for test
@@ -27,8 +30,10 @@ func main() {
 
 	// app -> Run()
 	if err := app.Run(cfg); err != nil {
-		slog.Debug("OOOO syeta tormozi davai check app run")
+		slog.Debug(err.Error())
+		return
 	}
+
 }
 
 // sqlite3

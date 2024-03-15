@@ -1,15 +1,14 @@
 package app
 
 import (
-	"fmt"
 	"forum/pkg/config"
 )
 
-func Run(cfg *config.Config) {
+func Run(cfg *config.Config) error {
 
 	// Init router
 
-	fmt.Printf("\n\n Server runnig on -> http://%s:%s\n\n Enter Ctrl + C for stop application", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
+	// fmt.Printf("\n\n Server runnig on -> http://%s:%s\n\n Enter Ctrl + C for stop application", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
 	// Perfect end our application
 
 	// prepare database for connection
@@ -25,4 +24,7 @@ func Run(cfg *config.Config) {
 	// syscall signal
 	// close database connnection
 	// stop http server
+
+	return nil
+
 }

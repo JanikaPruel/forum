@@ -14,6 +14,8 @@ func InitLogger(cfg *config.Config) (logger *slog.Logger, err error) {
 		return nil, errors.New("error, invalid config params")
 	}
 
+	// TODO: bigfix
+
 	// choice output = stdout or
 	// choice handler
 
@@ -33,10 +35,17 @@ func isValidLoggerConfigParams(cfg *config.Config) (valid bool) {
 		return false
 	}
 
+	if cfg.LoggerConfig.Level < int(slog.LevelDebug) || cfg.LoggerConfig.Level > int(slog.LevelError) {
+		return false
+	}
+
 	if !(cfg.LoggerConfig.Handler == "json" || cfg.LoggerConfig.Handler == "text") {
 		return false
-	} else if !(cfg.LoggerConfig.Output == "output" || cfg.LoggerConfig.Output == "file") {
+	}
+
+	if !(cfg.LoggerConfig.Output == "stdout" || cfg.LoggerConfig.Output == "file") { // bug
 		return false
+
 	}
 	return true
 }

@@ -1,0 +1,54 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #000000df;
+}
+
+.header {
+  background: #000000df; /* Adjust the color to match your design */
+  padding: 10px 20px; /* Adjust the padding to match your design */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  color: #ffffff;
+  font-size: 24px; /* Adjust the size to match your design */
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.header .header__search {
+  flex-grow: 1;
+  margin-right: 20px; /* This will give space between the search bar and the login section */
+}
+
+.header .header__search input[type="search"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 20px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+}
+
+.header__buttons {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  background-color: #f60; /* Adjust the background color to match your design */
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-left: 10px; /* This separates the buttons from each other */
+  cursor: pointer;
+}
+
+.button:hover, .button:focus {
+  margin-left: 10px; /* This separates the more options from the login buttons */
+  cursor: pointer;}

@@ -1,0 +1,140 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #000000df;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.page-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30%; /* Отступы с обеих сторон */
+  background: url('/view/static/favicon/android-chrome-512x512.png') no-repeat center center;
+  background-size: 55%; /* Размер фонового изображения */
+}
+
+.auth-container {
+  flex-basis: 50%; /* или 50vw для строгого контроля ширины */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Центрируем содержимое по вертикали */
+  align-items: flex-start; /* Выравниваем содержимое по левому краю */
+  padding: 11% 4% ; /* Отступ слева для .auth-container */
+  text-align: left; /* Текст выровнен влево */
+}
+
+.form-title {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.form-subtitle {
+  font-size: 3rem;
+  margin-bottom: 2.8rem;
+}
+
+.auth-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width:60%;
+}
+
+.auth-action {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 12px 40px;
+  margin-bottom: 10px; /* Добавляем нижний отступ между кнопками */
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.60rem;
+  transition: background-color 0.6s, color 0.6s;
+}
+
+.auth-action:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: transparent;
+}
+
+.footer-dummy {
+  text-align: center; /* Центрируем содержимое футера */
+  padding: 20px; /* Добавляем паддинг для визуального отступа от содержимого */
+  background: #000; /* Указываем фон, чтобы он совпадал с остальной частью страницы */
+  color: #ffffff7f; /* Цвет текста */
+  position: absolute; /* Позиционируем футер внизу страницы */
+  bottom: 0;
+  width: 100%; /* Футер растягиваем на всю ширину */
+}
+
+.footer-dummy a {
+  color: #ffffff8e; /* Цвет ссылок */
+  margin: 0 15px; /* Расстояние между ссылками */
+  text-decoration: none; /* Убираем подчеркивание текста */
+  position: relative; /* Для позиционирования псевдоэлемента */
+  display: inline-block; /* Необходимо для корректного позиционирования псевдоэлемента */
+  overflow: hidden; /* Чтобы полоса не выходила за границы текста */
+}
+
+.footer-dummy a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #ffffff8e;
+  transition: width 0.3s ease, left 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(0%);
+}
+
+.footer-dummy a:hover::after {
+  width: 100%; /* Полоса растягивается на всю ширину ссылки */
+  left: 0;
+  transform: translateX(0%);
+}
+
+@media (max-width: 600px) {
+  .page-container {
+    flex-direction: column;
+  }
+
+  .image-container, .auth-container {
+    flex-basis: auto;
+    width: 100%;
+    padding: 0 20px; /* Больше места для удобства на мобильных */
+  }
+
+  .image-container {
+    background-size: 80%; /* Увеличиваем логотип для мобильных устройств */
+  }
+
+  /* Скорректируйте размеры текста и кнопок для мобильных устройств */
+  .auth-logo h1 {
+    font-size: 5rem; /* Меньше для мобильных устройств */
+  }
+
+  .form-title {
+    font-size: 1.5rem; /* Меньше для мобильных устройств */
+  }
+
+  .form-subtitle,
+  .auth-action {
+    font-size: 1rem; /* Меньше для мобильных устройств */
+  }
+
+  .auth-action {
+    padding: 10px 20px; /* Меньше для мобильных устройств */
+  }
+}
