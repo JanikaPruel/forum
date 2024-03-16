@@ -18,7 +18,7 @@ body, html {
   justify-content: center;
   align-items: center;
   padding: 0 30%; /* Отступы с обеих сторон */
-  background: url('/view/static/favicon/android-chrome-512x512.png') no-repeat center center;
+  background: url('/internal/view/static/favicon/android-chrome-512x512.png') no-repeat center center;
   background-size: 55%; /* Размер фонового изображения */
 }
 

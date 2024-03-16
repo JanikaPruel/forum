@@ -2,53 +2,105 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #000000df;
+  background: #000000df;/* Обновите цвет фона для всей страницы */
 }
 
 .header {
-  background: #000000df; /* Adjust the color to match your design */
-  padding: 10px 20px; /* Adjust the padding to match your design */
+  background: #000000df;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  border-bottom: 2px solid #444;
 }
 
-.header__logo {
-  color: #ffffff;
-  font-size: 24px; /* Adjust the size to match your design */
-  font-weight: bold;
-  margin-right: 20px;
+.header__left, .header__right {
+  flex: 1;
 }
 
-.header .header__search {
-  flex-grow: 1;
-  margin-right: 20px; /* This will give space between the search bar and the login section */
+.header__logo  {
+  height: 50px;
+  color: #f8f9fa; /* Задаем высоту вашему логотипу */
+}
+.header__search {
+  flex: 2; /* Позволяет поисковой строке быть шире */
+  display: flex;
+  justify-content: center; /* Центрирование поисковой строки */
 }
 
 .header .header__search input[type="search"] {
-  width: 100%;
-  padding: 8px;
-  border-radius: 20px;
-  border: none;
-  background-color: #333;
-  color: #fff;
+  width: 35%;
+  padding: 20px 20px; /* Увеличиваем паддинг для поля поиска */
+  border-radius: 100px; /* Делаем поле поиска более круглым */
+  background-color: #f8f9fa22;
+  color: #ffffff;
+
+}
+
+.header .header__search input[type="search"]:hover {
+  background-color: rgba(255, 255, 255, 0.169); /* Увеличиваем непрозрачность при наведении */
+  transition: background-color 0.5s; /* Плавное изменение за 0.3 секунды */
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+input[type="search"] {
+  border: none; /* Убирает границу */
+  outline: none; /* Убирает фокусную рамку, которая может появляться при клике */
+  /* Остальные стили для поля ввода */
+  font-size: 19px;
 }
 
 .header__buttons {
   display: flex;
-  align-items: center;
+  justify-content: flex-end; /* Выравнивание кнопок по правому краю */
 }
-
-.button {
-  background-color: #f60; /* Adjust the background color to match your design */
+.fake-button {
+  background-color: #f8f9fa22;
   color: #fff;
   border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  margin-left: 10px; /* This separates the buttons from each other */
+  padding: 10px 20px;
+  border-radius: 50px; /* Делает края кнопки круглыми */
+  cursor: not-allowed; /* Показывает курсор в виде знака запрета */
+  position: relative; /* Для позиционирования псевдоэлемента */
+}
+.fake-button:after {
+  content: 'Fake button for project';
+  display: none;
+  position: absolute;
+  top: 100%; /* Располагаем текст под кнопкой */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  background-color: #333;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 16px;
+  white-space: nowrap;
+  z-index: 1; /* Гарантируем, что текст будет поверх других элементов */
+}
+.fake-button:hover:after, .fake-button:focus:after {
+  display: block; /* Показываем текст при наведении или фокусе */
+}
+.button {
+  background-color:  #000000df; 
+  color: #ffffff;
+  border: none;
+  padding: 20px 20px; /* Увеличиваем паддинг для кнопок */
+  border-radius: 100px; /* Делаем кнопки более круглыми */
+  margin-left: 10px;
   cursor: pointer;
+  font-size: 32px;
 }
 
 .button:hover, .button:focus {
-  margin-left: 10px; /* This separates the more options from the login buttons */
-  cursor: pointer;}
+  opacity: 0.9; /* Немного меняем прозрачность при наведении/фокусе */
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.169); /* Делаем фон кнопок темнее при наведении */
+  transition: background-color 0.5s; /* Плавное изменение за 0.3 секунды */
+}
