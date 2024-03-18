@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	mainPage  = "view/templates/main.html"
-	loginPage = "view/templates/login.html"
+	mainPage  = "/internal/view/templates/main.html"
+	loginPage = "/internal/view/templates/login.html"
 	viewDir   = "/internal/view/"
 )
 

@@ -1,6 +1,7 @@
 package router
 
 import (
+	"fmt"
 	"forum/internal/controller"
 	"log/slog"
 	"net/http"
@@ -29,8 +30,14 @@ func (r *Router) InitRouter() {
 	if err != nil {
 		slog.Error(err.Error())
 	}
-	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"view/templates/"))))
-	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"view/static/"))))
+	// internal/view/templates/main.html
+	// /home/kooduser/Kood-tasks/forumV2/internal/view/templates/main.html
+	fmt.Println("MESSAGE")
+	fmt.Println(controller.GetTmplFilepath("main"))
+	fmt.Println(controller.GetTmplFilepath("login"))
+	fmt.Println("MESSAGE")
+	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
+	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
 
 	r.Mux.HandleFunc("POST /sign-up", controller.MainController)
 	r.Mux.HandleFunc("POST /sign-in", controller.MainController)
