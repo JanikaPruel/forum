@@ -138,3 +138,134 @@ body, html {
     padding: 10px 20px; /* Меньше для мобильных устройств */
   }
 }
+
+.modal-overlay {
+  display: none;
+  position: fixed; /* Full-screen overlay */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.7); /* Dim the background */
+  z-index: 2; /* Make sure it's above other items */
+}
+
+/* Когда чекбокс активен, показываем оверлей и модальное окно 
+.modal-toggle:checked + .modal-overlay,
+.modal-toggle:checked ~ .modal-content {
+  display: block;
+}
+*/
+
+/* Когда чекбокс регистрации активен, показываем оверлей и модальное окно регистрации */
+#signup-modal-toggle:checked ~ .modal-overlay.signup,
+#signup-modal-toggle:checked ~ #signup-modal-content {
+  display: block;
+}
+
+/* Когда чекбокс входа активен, показываем оверлей и модальное окно входа */
+#signin-modal-toggle:checked ~ .modal-overlay.signin,
+#signin-modal-toggle:checked ~ #signin-modal-content {
+  display: block;
+}
+
+
+.modal-content {
+  display: none;
+  position: fixed; /* Fixed position */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  z-index: 3; /* Above the overlay */
+  /* остальные стили... */
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h2 {
+  color: #fff;
+}
+
+label {
+  margin-top: 10px;
+  display: block;
+}
+
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=password],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0 15px 0;
+  display: inline-block;
+  border: none;
+  background: #333;
+  color: white;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=number]:focus {
+  outline: none;
+  border: 2px solid #555;
+}
+
+button {
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.dob-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dob-inputs select,
+.dob-inputs input {
+  flex: 1;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .modal-content {
+    width: 80%;
+  }
+}
+
+/* Скрываем чекбокс */
+.modal-toggle {
+  display: none;
+}
+
+.form-field {
+  box-sizing: border-box;
+  width: 100%; /* Растягиваем на всю доступную ширину */
+  padding: 10px 15px; /* Добавляем паддинг для удобства */
+  
+  margin-bottom: 15px; /* Отступ между полями */
+  border: 1px solid #555; /* Граница поля */
+  background-color: #333; /* Цвет фона поля */
+  color: white; /* Цвет текста внутри поля */
+  border-radius: 10px; /* Скругляем углы */
+  /* Добавьте другие стили, если они нужны */
+}
