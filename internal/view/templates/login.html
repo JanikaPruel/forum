@@ -17,11 +17,79 @@
       <h2 class="form-title">Happening now</h2>
       <p class="form-subtitle">Join today : Cat - X </p>
       <div class="auth-actions">
-        <button class="auth-action">Sign up</button>
-        <button class="auth-action">Sign in</button>
+        <label for="signup-modal-toggle" class="auth-action">Sign up</label>
+        <label for="signin-modal-toggle" class="auth-action">Sign in</label>
       </div>
     </div>
   </div>
+    <!-- Чекбокс, который будет использоваться для открытия модального окна -->
+<input type="checkbox" id="signup-modal-toggle" class="modal-toggle">
+
+<!-- Оверлей для модального окна, который также закроет модальное окно, когда на него кликнут -->
+<label for="signup-modal-toggle" class="modal-overlay signup"></label>
+
+<!-- Содержимое модального окна для CSS-only решения -->
+<div class="modal-content" id="signup-modal-content">
+  <label for="signup-modal-toggle" class="close">&times;</label>
+  <h2>Create an account</h2>
+  <form id="form">
+    <!-- Форма регистрации с полями ввода и кнопкой -->
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your name" class="form-field">
+
+    <label for="email">Email</label>
+    <input type="email" id="signup-email" name="email" placeholder="Your email" class="form-field">
+
+    <label for="dob">Date of birth</label>
+    <div class="dob-inputs">
+      <select id="month" name="month" class="form-field">
+        <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
+        <!-- Другие месяцы -->
+      </select>
+      <select name="day" id="day" class="form-field">
+        <option value="1">1</option>
+      </select>
+      <select name="year" id="year" class="form-field">
+        <option value="1900">1900</option>
+      </select>
+    </div>
+    <label for="password">Password</label>
+    <input type="password" id="signup-password" name="password" placeholder="Create a password" class="form-field">
+    <button type="submit" class="form-field">Next</button>
+  </form>
+</div>
+
+<!-- Чекбокс для открытия модального окна авторизации -->
+<input type="checkbox" id="signin-modal-toggle" class="modal-toggle">
+
+<!-- Оверлей для модального окна авторизации -->
+<label for="signin-modal-toggle" class="modal-overlay signin"></label>
+
+<!-- Модальное окно авторизации -->
+<div class="modal-content" id="signin-modal-content">
+  <label for="signin-modal-toggle" class="close">&times;</label>
+  <h2>Sign in to Cat - X</h2>
+  <form id="signin-form">
+    <label for="email">Email</label>
+    <input type="email" id="signin-email" name="email" placeholder="Enter your email" class="form-field">
+
+    <label for="password">Password</label>
+    <input type="password" id="signin-password" name="password" placeholder="Enter your password" class="form-field">
+    <button type="submit" class="form-field">Sign in</button>
+  </form>
+</div>
+
   <footer class="footer-dummy">
     <a href="#" onclick="alert('Autors: Janika Pruel && Daniil Mjodov'); return false;">About us</a>
     <a href="#" onclick="alert('Someday we will make it.'); return false;">Download the Cat - X app</a>
