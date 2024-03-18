@@ -2,7 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #000000df;/* Обновите цвет фона для всей страницы */
+  background: #000000df;
 }
 
 .header {
@@ -103,4 +103,63 @@ input[type="search"] {
 .button:hover {
   background-color: rgba(255, 255, 255, 0.169); /* Делаем фон кнопок темнее при наведении */
   transition: background-color 0.5s; /* Плавное изменение за 0.3 секунды */
+}
+
+.wrapper {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #1a1a1b;
+  color: #d7dadc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item, .nested-item {
+  cursor: pointer;
+  padding: 10px 20px;
+  display: block;
+  position: relative;
+  border-bottom: 1px solid #343536;
+}
+
+.menu-item::after, .nested-item::after {
+  content: '▼';
+  float: right;
+}
+
+.toggle-checkbox:checked + label.menu-item::after,
+.toggle-checkbox:checked + label.nested-item::after {
+  content: '▲';
+}
+
+.nested-menu, .nested-submenu {
+  display: none;
+  list-style-type: none;
+  padding-left: 20px; /* Отступ для вложенных меню */
+}
+
+.toggle-checkbox:checked + label + .nested-menu,
+.toggle-checkbox:checked + label + .nested-submenu {
+  display: block; /* Показываем вложенное меню при активации чекбокса */
+}
+
+.nested-menu a, .nested-submenu a {
+  display: block;
+  color: #d7dadc;
+  text-decoration: none;
+  padding: 8px 20px;
+}
+
+.nested-menu a:hover, .nested-submenu a:hover {
+  color: #ffffff;
+  background-color: #343536;
 }
