@@ -12,28 +12,28 @@ import (
 type Database struct {
 	// path to database file
 	DatabaseFilePath string
-	sqlite           *sql.DB
+	SQLite           *sql.DB
 }
 
 // Логику sqlite мы вымещаем вне internal т.к это не критичная и переиспользуемая логика.
 
 // Connecttion
-func (d *Database) ConnectionToDB(cfg *config.Config) (db *Database, err error) {
+func ConnectionToDB(cfg *config.Config) (*Database, error) {
 	if cfg == nil {
 		return nil, errors.New("error, config is nil")
 	}
-
-	db.sqlite, err = sql.Open("go-sqlite3", cfg.DBConfig.DatabaseFilePath)
+	DB := &Database{}
+	db, err := sql.Open("sqlite3", cfg.DBConfig.DatabaseFilePath)
 	if err != nil {
 		return nil, err
 	}
-
-	return db, nil
+	DB.SQLite = db
+	return DB, nil
 }
 
 // Disconnect
 func (d *Database) Disconnect() error {
-	if err := d.sqlite.Close(); err != nil {
+	if err := d.SQLite.Close(); err != nil {
 		return err
 	}
 

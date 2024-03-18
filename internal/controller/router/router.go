@@ -2,7 +2,9 @@ package router
 
 import (
 	"forum/internal/controller"
+	"log/slog"
 	"net/http"
+	"os"
 )
 
 // route structure <- serveMux - stdlib
@@ -23,40 +25,46 @@ func New() *Router {
 
 // InitRouter -
 func (r *Router) InitRouter() {
+	wd, err := os.Getwd()
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"view/templates/"))))
+	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"view/static/"))))
 
-	r.Mux.HandleFunc("POST /sign-up", controller.MainContrller)
-	r.Mux.HandleFunc("POST /sign-in", controller.MainContrller)
+	r.Mux.HandleFunc("POST /sign-up", controller.MainController)
+	r.Mux.HandleFunc("POST /sign-in", controller.MainController)
 
-	r.Mux.HandleFunc("GET /", controller.MainContrller)
+	r.Mux.HandleFunc("GET /", controller.MainController)
 
 	// categories
-	r.Mux.HandleFunc("GET /categories", controller.MainContrller)
-	r.Mux.HandleFunc("GET /admin/categories/{id}", controller.MainContrller)
-	r.Mux.HandleFunc("POST /admin/categories", controller.MainContrller)
-	r.Mux.HandleFunc("PUT /admin/categories/{id}", controller.MainContrller)
-	r.Mux.HandleFunc("DELETE /admin/catefories/{id}", controller.MainContrller)
+	r.Mux.HandleFunc("GET /categories", controller.MainController)
+	r.Mux.HandleFunc("GET /admin/categories/{id}", controller.MainController)
+	r.Mux.HandleFunc("POST /admin/categories", controller.MainController)
+	r.Mux.HandleFunc("PUT /admin/categories/{id}", controller.MainController)
+	r.Mux.HandleFunc("DELETE /admin/catefories/{id}", controller.MainController)
 
 	// posts
-	r.Mux.HandleFunc("GET  /posts", controller.MainContrller)
-	r.Mux.HandleFunc("GET  /posts/{id}", controller.MainContrller)
-	r.Mux.HandleFunc("POST /posts", controller.MainContrller)
-	r.Mux.HandleFunc("PUT  /posts/id", controller.MainContrller)
-	r.Mux.HandleFunc("DELETE  /posts/{id}", controller.MainContrller)
+	r.Mux.HandleFunc("GET  /posts", controller.MainController)
+	r.Mux.HandleFunc("GET  /posts/{id}", controller.MainController)
+	r.Mux.HandleFunc("POST /posts", controller.MainController)
+	r.Mux.HandleFunc("PUT  /posts/id", controller.MainController)
+	r.Mux.HandleFunc("DELETE  /posts/{id}", controller.MainController)
 
 	// comments
-	r.Mux.HandleFunc("GET /comments", controller.MainContrller)
-	r.Mux.HandleFunc("GET /comments/{id}", controller.MainContrller)
-	r.Mux.HandleFunc("POST /comments", controller.MainContrller)
-	r.Mux.HandleFunc("PUT /comments/{id}", controller.MainContrller)
-	r.Mux.HandleFunc("DELETE /comments/{id}", controller.MainContrller)
+	r.Mux.HandleFunc("GET /comments", controller.MainController)
+	r.Mux.HandleFunc("GET /comments/{id}", controller.MainController)
+	r.Mux.HandleFunc("POST /comments", controller.MainController)
+	r.Mux.HandleFunc("PUT /comments/{id}", controller.MainController)
+	r.Mux.HandleFunc("DELETE /comments/{id}", controller.MainController)
 
 	// likes
-	r.Mux.HandleFunc("GET /comments/{id}/like", controller.MainContrller)
-	r.Mux.HandleFunc("GET /post/{id}/like", controller.MainContrller)
+	r.Mux.HandleFunc("GET /comments/{id}/like", controller.MainController)
+	r.Mux.HandleFunc("GET /post/{id}/like", controller.MainController)
 
 	// dislikes
-	r.Mux.HandleFunc("GET /comments/{id}/dislike", controller.MainContrller)
-	r.Mux.HandleFunc("GET /post/{id}/dislike", controller.MainContrller)
+	r.Mux.HandleFunc("GET /comments/{id}/dislike", controller.MainController)
+	r.Mux.HandleFunc("GET /post/{id}/dislike", controller.MainController)
 
 } // 1.22
 

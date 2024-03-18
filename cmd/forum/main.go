@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"forum/internal/app"
 	"forum/pkg/config"
 	"forum/pkg/logger"
