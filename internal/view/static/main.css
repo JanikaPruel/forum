@@ -298,3 +298,28 @@ background-color: #272729; /* Слегка осветлить фон при на
   width: 100%;
   margin-top: 20px;
 }
+
+#posts {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравнивание постов по центру */
+  margin: 20px auto;
+  background-color: #f8f9fa22; /* Светлый фон для зоны постов */
+  padding: 20px; /* Отступы внутри зоны постов */
+  border-radius: 8px; /* Немного скруглить углы */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для объемности */
+  margin: 20px auto; /* Отступы сверху и снизу, автоматические по бокам */
+  width: 80%; /* Или другой подходящий вам размер */
+  max-width: 800px; /* Максимальная ширина */
+}
+
+.post {
+  background-color: #1a1a1b;
+  color: #d7dadc;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  width: 80%; /* или нужная вам ширина */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
