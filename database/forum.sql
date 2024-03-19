@@ -18,7 +18,7 @@ CREATE TABLE if not EXISTS sessions (
 
 CREATE TABLE if not EXISTS categories ( -- id, title
     id integer primary key autoincrement not null,
-    title varchar(255) not null,
+    name varchar(255) not null,
     created_at datetime not null default 'now'
 );
 
@@ -55,6 +55,13 @@ CREATE TABLE if not EXISTS posts ( -- id, title, content, image, likes, dislikes
     user_id integer references users(id),
     comment integer references comments(id),
     created_at datetime not null default 'now'
+);
+
+CREATE TABLE IF NOT EXISTS post_categories (
+    id	INTEGER PRIMARY KEY AUTOINCREMENT,
+	category_id	INTEGER REFERENCES categories(id),
+	post_id	INTEGER REFERENCES posts(id)    
+
 );
 
 CREATE TABLE if not EXISTS comments ( -- id, user_id, post_id, content, created_at, updated_at, likes, dislikes
