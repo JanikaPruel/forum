@@ -125,16 +125,53 @@ input[type="search"] {
   margin-left: 10px;
 }
 
-.dropdown-arrow {
-  margin-left: 5px;
-  /* Другие стили для стрелки выпадающего списка, если нужны */
-}
-
 /* Стили для эффекта наведения */
 .icon-button:hover, .profile-menu:hover {
   background: rgba(192, 192, 192, 0.1);
   border-radius: 4px;
 }
+
+.menu-checkbox {
+  display: none; /* Скрываем чекбокс */
+}
+
+.menu-checkbox:checked + .icon-button + .dropdown-content {
+  display: block; /* Показываем меню, когда чекбокс выбран */
+}
+
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-button {
+  /* ... Стили кнопки ... */
+  padding: 10px; /* Регулируем размер для большей кликабельной области */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  /* ... */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  /* ... */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+
 
 .wrapper {
   display: flex;
