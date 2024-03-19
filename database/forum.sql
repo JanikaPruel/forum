@@ -57,7 +57,7 @@ CREATE TABLE if not EXISTS posts ( -- id, title, content, image, likes, dislikes
     created_at datetime not null default 'now'
 );
 
-CREATE TABLE IF NOT EXISTS post_categories (
+CREATE TABLE IF NOT EXISTS posts_categories (
     id	INTEGER PRIMARY KEY AUTOINCREMENT,
 	category_id	INTEGER REFERENCES categories(id),
 	post_id	INTEGER REFERENCES posts(id)    
