@@ -36,6 +36,21 @@ func (ur *UserRepository) GetUserByEmail(email string) *model.User {
 	return &user
 }
 
+// GetUserByID
+func (ur *UserRepository) GetUserByID(userID int) (*model.User, error) {
+	user := model.User{}
+	err := ur.DB.SQLite.QueryRow("SELECT id, username, email, password, created_at FROM users WHERE id=?", userID).
+		Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.CreatedAt)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			slog.Error(err.Error())
+		}
+		return nil, err
+	}
+
+	return &user, nil
+}
+
 // CreateUser
 func (ur *UserRepository) CreateUser(user *model.User) (userID int, err error) {
 	res, err := ur.DB.SQLite.Exec("INSERT INTO users (username, email, password) values(?, ?, ?)",

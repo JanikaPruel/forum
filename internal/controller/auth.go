@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"log/slog"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gofrs/uuid"
@@ -73,11 +75,13 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 	uuid := uuid.DefaultGenerator
 	suuid, _ := uuid.NewV4()
 	sValue := suuid.String()
+	ids := strconv.Itoa(userID)
+	svalue := strings.Join([]string{ids, sValue}, ",")
 
 	expires := time.Now().Add(1 * time.Hour)
 	cookie := &http.Cookie{
 		Name:     "sessionID",
-		Value:    sValue,
+		Value:    svalue,
 		Expires:  expires,
 		HttpOnly: true,
 		Secure:   true,
@@ -120,15 +124,29 @@ func (ctl *BaseController) SignIn(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ctl *BaseController) Logout(w http.ResponseWriter, r *http.Request) {
-	coockie, err  := r.Cookie("sessionID")
+	cookie, err := r.Cookie("sessionID")
 	if err != nil {
 		slog.Error(err.Error())
-		http.Redirect(w, r, "GET /", http.StatusSeeOther)
+		http.Redirect(w, r, "GET /", http.StatusUnauthorized)
 	}
 
-	// get 
+	// get userID from cookie
+	sValue := cookie.Value
+	svalue := strings.Split(sValue, ",")
 
+	userID, err := strconv.Atoi(svalue[0])
+	if err != nil {
+		slog.Error(err.Error())
+		http.Redirect(w, r, "GET /", http.StatusUnauthorized)
+	}
 
+	if err := ctl.Repo.URepo.RemoveSession(userID); err != nil {
+		slog.Error(err.Error())
+		http.Redirect(w, r, "GET /", http.StatusUnauthorized)
+	}
+
+	slog.Info("User logout")
+	http.Redirect(w, r, "GET /", http.StatusSeeOther)
 }
 
 // // GetHashFromPassword

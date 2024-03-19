@@ -71,7 +71,7 @@ func MainController(w http.ResponseWriter, r *http.Request) {
 
 	// posts
 
-	// 
+	//
 
 	//  <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
 	//   <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.gok
