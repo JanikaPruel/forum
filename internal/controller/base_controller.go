@@ -48,7 +48,7 @@ func GetTmplFilepath(tmplName string) (tmplFilepath string) {
 	return tmplFilepath
 }
 
-type Date struct {
+type Data struct {
 	Categories []model.Category
 	Posts      []model.Post
 	Comments   []model.Comment
@@ -56,7 +56,7 @@ type Date struct {
 }
 
 // MainController
-func MainController(w http.ResponseWriter, r *http.Request) {
+func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request) {
 	// wd, err := os.Getwd() // /home/kooduser/Kood-tasks/forumV2 + ""
 	// if err != nil {
 	// 	slog.Error(err.Error())
@@ -68,7 +68,10 @@ func MainController(w http.ResponseWriter, r *http.Request) {
 	// logout
 
 	// categories
-
+	categories, err := ctl.Repo.CRepo.GetAllCategories()
+	if err != nil {
+		slog.Error(err.Error())
+	}
 	// posts
 
 	//
@@ -76,9 +79,14 @@ func MainController(w http.ResponseWriter, r *http.Request) {
 	//  <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
 	//   <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.gok
 
+	// DATA
+	data := Data{
+		Categories: categories,
+	}
+
 	tmp := template.Must(template.ParseFiles(GetTmplFilepath("main")))
 
-	if err := tmp.Execute(w, nil); err != nil {
+	if err := tmp.Execute(w, data); err != nil {
 		slog.Error(err.Error())
 	}
 }

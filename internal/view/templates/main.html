@@ -48,62 +48,9 @@
           <input type="checkbox" id="topics-toggle" class="toggle-checkbox" hidden>
           <label for="topics-toggle" class="menu-item">TOPICS</label>
           <ul class="nested-menu">
-            <li>
-              <input type="checkbox" id="gaming-toggle" class="toggle-checkbox" hidden>
-              <label for="gaming-toggle" class="nested-item">Gaming</label>
-              <ul class="nested-submenu">
-                <li><a href="#" onclick="alert('The best game of all time and the game of my childhoс'); return false;">Lineage 2</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Dota 2</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Minecraft</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Counter-Strike</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Path of Exile</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Escape from Tarkov</a></li>
-              </ul>
-            </li>
-            <li>
-              <input type="checkbox" id="sport-toggle" class="toggle-checkbox" hidden>
-              <label for="sport-toggle" class="nested-item">Sport</label>
-              <ul class="nested-submenu">
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">NBA</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">NFL</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">UFC</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Premier League</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Arsenal F.C.</a></li>
-              </ul>
-            </li>
-            <li>
-              <input type="checkbox" id="business-toggle" class="toggle-checkbox" hidden>
-              <label for="business-toggle" class="nested-item">Business</label>
-              <ul class="nested-submenu">
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">GameStop</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Best Buy</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">SpaceX</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Stocks</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Bonds</a></li>
-              </ul>
-            </li>
-            <li>
-              <input type="checkbox" id="crypto-toggle" class="toggle-checkbox" hidden>
-              <label for="crypto-toggle" class="nested-item">Crypto</label>
-              <ul class="nested-submenu">
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Bitcoin</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Dogecoin</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Cardano</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Algorand</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">4Chancoin</a></li>
-              </ul>
-            </li>
-            <li>
-              <input type="checkbox" id="celebrity-toggle" class="toggle-checkbox" hidden>
-              <label for="celebrity-toggle" class="nested-item">Celebrity</label>
-              <ul class="nested-submenu">
-                <li><a href="#" onclick="alert('She is a kitty at heart'); return false;">Janika Pruel</a></li>
-                <li><a href="#" onclick="alert('The power of youth is in the blood'); return false;">Loid Forger</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">Giga Chad</a></li>
-                <li><a href="#" onclick="alert('Fake link for project'); return false;">David</a></li>
-                <li><a href="#" onclick="alert('20 : 31 Goju Satoru arrived'); return false;">Gojo Satoru</a></li>
-              </ul>
-            </li>
+            {{range .Categories}}
+          <li><a href="/category/?id={{.ID}}">{{.Name}}</a></li>
+          {{end}}
           </ul>
         </li>
         <!-- Другие основные разделы, такие как "RESOURCES" и т.д. -->

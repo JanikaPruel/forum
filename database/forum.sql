@@ -80,3 +80,19 @@ DROP TABLE sessions;
 DROP TABLE categories;
 DROP TABLE posts;
 DROP TABLE comments;
+
+
+
+insert into categories ("name") VALUES
+   ("Gaming"),
+   ("Sport"),
+   ("Business"),
+   ("Crypo"),
+   ("Celebrity"),
+   ("Anime"),
+   ("Life"),
+   ("Music"),
+   ("Cats"),
+   ("Free time"),
+   ("Food"),
+   ("Other");
