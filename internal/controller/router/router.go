@@ -2,10 +2,11 @@ package router
 
 import (
 	"fmt"
-	"forum/internal/controller"
 	"log/slog"
 	"net/http"
 	"os"
+
+	"forum/internal/controller"
 )
 
 // route structure <- serveMux - stdlib
@@ -40,7 +41,7 @@ func (r *Router) InitRouter() {
 	fmt.Println("MESSAGE")
 	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
 	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
-	r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
+	// r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
 
 	r.Mux.HandleFunc("GET /login", controller.Login)
 	r.Mux.HandleFunc("POST /sign-up", r.Ctl.SignUp)

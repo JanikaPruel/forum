@@ -1,10 +1,13 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
+	"log/slog"
+	"time"
+
 	"forum/internal/model"
 	"forum/pkg/sqlite"
-	"time"
 )
 
 // UserRepository
@@ -21,10 +24,14 @@ func NewUserRepository(db *sqlite.Database) *UserRepository {
 
 // GetUserByEmail
 func (ur *UserRepository) GetUserByEmail(email string) (*model.User, error) {
-	row := ur.DB.SQLite.QueryRow("SELECT id, username, email, password FROM users WHERE email=$1", email)
+	row := ur.DB.SQLite.QueryRow("SELECT id, username, email, password FROM users WHERE email=?", email)
 
 	user := &model.User{}
 	if err := row.Scan(user.ID, user.Username, user.Email, user.Password); err != nil {
+		if err != sql.ErrNoRows {
+			slog.Error(err.Error())
+			return nil, nil
+		}
 		return nil, err
 	}
 
@@ -33,7 +40,7 @@ func (ur *UserRepository) GetUserByEmail(email string) (*model.User, error) {
 
 // CreateUser
 func (ur *UserRepository) CreateUser(user *model.User) (userID int, err error) {
-	res, err := ur.DB.SQLite.Exec("INSERT INTO users (username, email, password) values($1, $2, $3)",
+	res, err := ur.DB.SQLite.Exec("INSERT INTO users (username, email, password) values(?, ?, ?)",
 		user.Username, user.Email, user.Password)
 	if err != nil {
 		return 0, err
@@ -52,7 +59,7 @@ func (ur *UserRepository) CreateUser(user *model.User) (userID int, err error) {
 
 // CreateSession
 func (ur *UserRepository) CreateSession(sessionID string, userID int, expires time.Time) error {
-	res, err := ur.DB.SQLite.Exec("INSERT INTO sessions (id, user_id, expires_at) values($1, $2, $3)",
+	res, err := ur.DB.SQLite.Exec("INSERT INTO sessions (id, user_id, expires_at) values(?, ?, ?)",
 		sessionID, userID, expires)
 	if err != nil {
 		return err
