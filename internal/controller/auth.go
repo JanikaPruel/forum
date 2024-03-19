@@ -149,6 +149,29 @@ func (ctl *BaseController) Logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "GET /", http.StatusSeeOther)
 }
 
+func (ctl *BaseController) GetAuthUser(r *http.Request) (user *model.User) {
+	// get userID from cookie
+	cookie, err := r.Cookie("sessionID")
+	if err != nil {
+		return nil
+	}
+	sValue := cookie.Value
+	svalue := strings.Split(sValue, ",")
+
+	userID, err := strconv.Atoi(svalue[0])
+	if err != nil {
+		return nil
+	}
+
+	user, err = ctl.Repo.URepo.GetUserByID(userID)
+	if err != nil {
+		return nil
+	}
+
+	return user
+}
+
+
 // // GetHashFromPassword
 // func GetHashFromPassword(password string) (passwordHash string, err error) {
 // 	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)

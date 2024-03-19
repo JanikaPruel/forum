@@ -47,7 +47,7 @@ func (pr *PostRepository) CreatePost(post model.Post) (categoryID int, err error
 }
 
 // GetAllPosts
-func (pr *PostRepository) GetAllPost() (posts []*model.Post, err error) {
+func (pr *PostRepository) GetAllPosts() (posts []*model.Post, err error) {
 
 	postsRows, err := pr.DB.SQLite.Query("SELECT id, user_id, title, content, likes, dislikes, created_at FROM posts")
 	if err != nil {

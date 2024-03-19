@@ -50,9 +50,10 @@ func GetTmplFilepath(tmplName string) (tmplFilepath string) {
 
 type Data struct {
 	Categories []model.Category
-	Posts      []model.Post
+	Posts      []*model.Post
 	Comments   []model.Comment
-	AuthUser   model.User
+	User       *model.User
+	Cookie     *http.Cookie
 }
 
 // MainController
@@ -73,8 +74,15 @@ func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request
 		slog.Error(err.Error())
 	}
 	// posts
+	posts, err := ctl.Repo.PRepo.GetAllPosts()
+	if err != nil {
+		slog.Error(err.Error())
+	}
 
-	//
+	cookie, _ := r.Cookie("sissionID")
+
+	user := ctl.GetAuthUser(r)
+	if user != nil 
 
 	//  <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
 	//   <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.gok
@@ -82,6 +90,9 @@ func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request
 	// DATA
 	data := Data{
 		Categories: categories,
+		Posts:      posts,
+		// User:       user,
+		Cookie: cookie,
 	}
 
 	tmp := template.Must(template.ParseFiles(GetTmplFilepath("main")))
