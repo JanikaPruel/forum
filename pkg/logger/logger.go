@@ -2,9 +2,10 @@ package logger
 
 import (
 	"errors"
-	"forum/pkg/config"
 	"log/slog"
 	"os"
+
+	"forum/pkg/config"
 )
 
 // InitLogger return a new customized slog logger instance
@@ -19,7 +20,7 @@ func InitLogger(cfg *config.Config) (logger *slog.Logger, err error) {
 	// choice output = stdout or
 	// choice handler
 
-	logger = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+	logger = slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		Level:     slog.Level(cfg.LoggerConfig.Level),
 		AddSource: cfg.LoggerConfig.SourceKey,
 	}).WithAttrs([]slog.Attr{slog.String("service_name", cfg.ServiceName)}))

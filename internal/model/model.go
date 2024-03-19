@@ -45,22 +45,22 @@ import "time"
 // Но различия есть разумеется
 
 type User struct {
-	ID        int    `sql:"id"`
-	Username  string `sql:"username"`
-	Email     string `sql:"email"`
-	Password  string `sql:"password"`
+	ID        int       `sql:"id"`
+	Username  string    `sql:"username"`
+	Email     string    `sql:"email"`
+	Password  string    `sql:"password"`
 	CreatedAt time.Time `sql:"created_at"`
 }
 
 type Session struct {
-	ID      int           `sql:"id"`
-	UserID  int           `sql:"username"`
+	ID      int       `sql:"id"`
+	UserID  int       `sql:"username"`
 	Expires time.Time `sql:"expired"`
 }
 
 type Category struct {
-	ID        int           `sql:"id"`
-	Name     string        `sql:"name"`
+	ID        int       `sql:"id"`
+	Name      string    `sql:"name"`
 	CreatedAt time.Time `sql:"created_at"`
 }
 
@@ -91,7 +91,7 @@ type Post struct {
 	Username             string    `sql:"username"`
 	Title                string    `sql:"title"`
 	Content              string    `sql:"content"`
-	Category             []int       `sql:"category"`
+	Category             []int     `sql:"category"`
 	Comment              int       `sql:"comment"`
 	Likes                int       `sql:"likes"`
 	Dislikes             int       `sql:"dislikes"`
