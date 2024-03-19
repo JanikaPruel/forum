@@ -21,7 +21,7 @@ func NewPostRepository(db *sqlite.Database) *PostRepository {
 	}
 }
 
-// Posts
+// CreatePost
 func (pr *PostRepository) CreatePost(post model.Post) (categoryID int, err error) {
 	res, err := pr.DB.SQLite.Exec("INSERT INTO posts (user_id, title, content, likes, dislikes, created_at) VALUES (?, ?, ?, ?, ?, ?)",
 		post.UserID, post.Title, post.Content, post.Likes, post.Dislikes, post.CreatedAt)

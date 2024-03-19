@@ -7,6 +7,7 @@ type Repository struct {
 	URepo *UserRepository
 	CRepo *CategoryRepository
 	PRepo *PostRepository
+	ComRepo *CommentRepository
 }
 
 // New Repository
@@ -15,5 +16,6 @@ func New(db *sqlite.Database) *Repository {
 		URepo: NewUserRepository(db),
 		CRepo: NewCateforyRepository(db),
 		PRepo: NewPostRepository(db),
+		ComRepo: NewCommentRepository(db),
 	}
 }
