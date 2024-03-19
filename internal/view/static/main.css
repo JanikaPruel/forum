@@ -20,8 +20,7 @@ body, html {
 }
 
 .header__logo  {
-  height: 50px;
-  color: #f8f9fa; /* Задаем высоту вашему логотипу */
+ color: white;
 }
 .header__search {
   flex: 2; /* Позволяет поисковой строке быть шире */

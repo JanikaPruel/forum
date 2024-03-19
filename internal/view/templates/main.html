@@ -11,13 +11,26 @@
 </head>
 <body>
   <header class="header">
-    <div class="header__logo">Logo</div>
+    <div class="header__logo"></div>
+    <a href="#" onclick="location.reload(true);">
+      <img src="/internal/view/static/icons8-кот-64.png" alt="logo">
+    </a>
     <div class="header__search">
       <input type="search" placeholder="Search Cat : X" aria-label="Search">
     </div>
-    <div class="header__buttons">
-      <button class="fake-button" aria-label="Get app"><a href="/login"> Get app</a></button>
-      <button class="button" aria-label="Settings">...</button>
+    <div class="header__profile-controls">
+      <div class="profile">
+        <img src="path_to_avatar.png" alt="Avatar" class="profile__avatar"> <!-- Добавляем аватар -->
+        <span class="profile__name">u/Devel0r</span> <!-- Имя пользователя -->
+      </div>
+      <div class="header__right">
+        <button class="icon-button" aria-label="Notifications"><img src="/internal/view/static/icons8-напоминания-32.png" alt="Notifications" /></button>
+        <button class="icon-button" aria-label="Create"><img src="path_to_create_icon.png" alt="Create" /></button>
+        <div class="profile-menu">
+          <img src="path_to_user_avatar.png" alt="User Avatar" class="user-avatar" />
+          <span class="dropdown-arrow">▼</span>
+        </div>
+      </div>
     </div>
   </header>
   <div class="wrapper">
