@@ -54,6 +54,26 @@ func (cr *CategoryRepository) GetCategoryByID(categoryID int) (category model.Ca
 	return category, nil
 }
 
+// GetCategoriesByPostID
+func (cr *CategoryRepository) GetCategoriesByPostId(postID int) (categories []*model.Category, err error) {
+	rows, err := cr.DB.SQLite.Query("SELECT categories.id, categories.name FROM post_categories INNER JOIN categories ON post_categories.category_id = categories.id WHERE post_categories.post_id = ?", postID)
+	if err != nil {
+		slog.Error(err.Error())
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		cat := model.Category{}
+		if err := rows.Scan(&cat.ID, &cat.Name); err != nil {
+			slog.Error(err.Error())
+			continue
+		}
+		categories = append(categories, &cat)
+	}
+	return categories, nil
+}
+
 // CreateCategory
 func (cr *CategoryRepository) CreateCategory(category *model.Category) error {
 	_, err := cr.DB.SQLite.Exec("INSERT INTO categories(name) values(?)", category.Name)

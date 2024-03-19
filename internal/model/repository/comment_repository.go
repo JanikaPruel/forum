@@ -92,7 +92,6 @@ func (comr *CommentRepository) GetCommentByID(commentId int) (*model.Comment, er
 	return &com, nil
 }
 
-
 // UpdateComment
 func (comr *CommentRepository) UpdateCommentData(commentID, newLikes, newDislikes int) error {
 	_, err := comr.DB.SQLite.Exec("UPDATE comments SET likes = ?, dislikes = ? WHERE id = ?", newLikes, newDislikes, commentID)
