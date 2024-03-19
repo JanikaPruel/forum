@@ -15,13 +15,17 @@ body, html {
   border-bottom: 2px solid #444;
 }
 
-.header__left, .header__right {
+.header__left {
   flex: 1;
 }
 
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
 .header__logo  {
-  height: 50px;
-  color: #f8f9fa; /* Задаем высоту вашему логотипу */
+ color: white;
 }
 .header__search {
   flex: 2; /* Позволяет поисковой строке быть шире */
@@ -105,6 +109,70 @@ input[type="search"] {
   transition: background-color 0.5s; /* Плавное изменение за 0.3 секунды */
 }
 
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.icon-button img {
+  height: 60px; /* Или другой размер, который вам подходит */
+}
+
+.user-avatar {
+  border-radius: 50%; /* Делаем аватар круглым */
+  margin-left: 10px;
+}
+
+/* Стили для эффекта наведения */
+.icon-button:hover, .profile-menu:hover {
+  background: rgba(192, 192, 192, 0.1);
+  border-radius: 4px;
+}
+
+.menu-checkbox {
+  display: none; /* Скрываем чекбокс */
+}
+
+.menu-checkbox:checked + .icon-button + .dropdown-content {
+  display: block; /* Показываем меню, когда чекбокс выбран */
+}
+
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-button {
+  /* ... Стили кнопки ... */
+  padding: 10px; /* Регулируем размер для большей кликабельной области */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  /* ... */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  /* ... */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+
+
 .wrapper {
   display: flex;
 }
@@ -162,4 +230,108 @@ input[type="search"] {
 .nested-menu a:hover, .nested-submenu a:hover {
   color: #ffffff;
   background-color: #343536;
+}
+
+/* Используем тот же оверлей, что и для окна входа */
+#signin-modal-toggle:checked ~ .modal-overlay,
+#create-post-modal-toggle:checked ~ .modal-overlay {
+  display: block;
+}
+
+/* Общий оверлей для всех модальных окон */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 10;
+}
+
+/* Стили модального окна для создания поста */
+.modal-content {
+  background-color: #474747; /* Темный фон */
+  color: #fff; /* Белый текст */
+  padding: 20px; /* Внутренние отступы */
+  width: 30%; /* Ширина модального окна */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для 3D-эффекта */
+  border-radius: 8px; /* Скругленные углы */
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  /* Добавьте здесь остальные стили, например, размеры, padding, фон и т.д. */
+}
+
+/* Стилизация полей ввода и текстовых областей */
+.modal-content input[type="text"],
+.modal-content textarea {
+  background-color: #fff; /* Белый фон */
+  border: 1px solid #ccc; /* Граница */
+  border-radius: 4px; /* Скругление углов */
+  padding: 10px; /* Внутренний отступ */
+  margin-top: 10px; /* Отступ сверху */
+}
+
+/* Стилизация кнопки отправки формы */
+.modal-content form button {
+background-color: #1a1a1b; /* Цвет фона кнопки */
+color: #d7dadc; /* Цвет текста кнопки */
+border: none;
+border-radius: 4px;
+padding: 10px 15px;
+text-transform: uppercase; /* Большие буквы */
+font-weight: bold; /* Жирный текст */
+margin-top: 15px; /* Отступ сверху */
+cursor: pointer; /* Курсор в виде указателя */
+}
+
+/* Стилизация кнопки при наведении */
+.modal-content form button:hover {
+background-color: #272729; /* Слегка осветлить фон при наведении */
+}
+
+/* Стиль для закрывающей кнопки (крестик) */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Показываем модальное окно при активном чекбоксе */
+#create-post-modal-toggle:checked ~ .modal-overlay,
+#create-post-modal-toggle:checked ~ .modal-content {
+  display: block;
+}
+
+/* Стили для формы в модальном окне создания поста */
+#create-post-modal-content form label {
+  display: block;
+  margin-top: 10px;
+}
+
+#create-post-modal-content form input,
+#create-post-modal-content form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+#create-post-modal-content form button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
 }
