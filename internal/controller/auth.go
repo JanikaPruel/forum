@@ -45,7 +45,7 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// hashing password
-	hash, err := GetHashFromPassword(password)
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
 	if err != nil {
 		slog.Error(err.Error())
 		errMsg := "Invalid password, enter correct password, and try again!"
@@ -57,7 +57,7 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 	user := &model.User{
 		Username: username,
 		Email:    email,
-		Password: hash,
+		Password: string(hash),
 	}
 
 	// insert this user into database
@@ -93,25 +93,66 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
 	http.SetCookie(w, cookie)
 
 	// redirect to main page
 	http.Redirect(w, r, "GET /", http.StatusSeeOther)
 }
 
-func SignIn(w http.ResponseWriter, r *http.Request) {
-}
+func (ctl *BaseController) SignIn(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles(GetTmplFilepath("login")))
+	email := r.FormValue("email")
+	password := r.FormValue("password")
 
-func Logout(w http.ResponseWriter, r *http.Request) {
-}
+	user := ctl.Repo.URepo.GetUserByEmail(email)
 
-// GetHashFromPassword
-func GetHashFromPassword(password string) (passwordHash string, err error) {
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
-	if err != nil {
-		return "", err
+	if user != nil {
+		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
+			coockie := ctl.GetCoockie(user)
+			http.SetCookie(w, coockie)
+			http.Redirect(w, r, "GET /", http.StatusSeeOther)
+		} else {
+			errMsg := "Invalid Email or Password. Please, try again!"
+			tmpl.Execute(w, errMsg)
+			return
+		}
 	}
+}
 
-	return string(hash), nil
+func (ctl *BaseController) Logout(w http.ResponseWriter, r *http.Request) {
+
+}
+
+// // GetHashFromPassword
+// func GetHashFromPassword(password string) (passwordHash string, err error) {
+// 	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
+// 	if err != nil {
+// 		return "", err
+// 	}
+
+// 	return string(hash), nil
+// }
+
+// GetCockie
+func (ctl *BaseController) GetCoockie(user *model.User) *http.Cookie {
+	// create a new cookie, and set this cookie to user
+	uuid := uuid.DefaultGenerator
+	suuid, _ := uuid.NewV4()
+	sValue := suuid.String()
+
+	expires := time.Now().Add(1 * time.Hour)
+	coockie := &http.Cookie{
+		Name:     "sessionID",
+		Value:    sValue,
+		Expires:  expires,
+		HttpOnly: true,
+		Secure:   true,
+	}
+	// user = ctl.Repo.URepo.GetUserByEmail()
+
+	ctl.Repo.URepo.RemoveSession(user.ID)
+
+	ctl.Repo.URepo.CreateSession(user.ID, expires)
+
+	return coockie
 }

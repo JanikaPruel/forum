@@ -70,3 +70,13 @@ func (ur *UserRepository) CreateSession(userID int, expires time.Time) error {
 
 	return nil
 }
+
+// RemoveSession
+func (ur *UserRepository) RemoveSession(userID int) error {
+	_, err := ur.DB.SQLite.Exec("DELETE FROM sessions WHERE user_id = ?", userID)
+	if err != nil {
+		slog.Error(err.Error())
+	}
+
+	return err
+}

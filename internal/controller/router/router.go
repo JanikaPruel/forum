@@ -45,8 +45,8 @@ func (r *Router) InitRouter() {
 
 	r.Mux.HandleFunc("GET /login", controller.Login)
 	r.Mux.HandleFunc("POST /sign-up", r.Ctl.SignUp)
-	r.Mux.HandleFunc("POST /sign-in", controller.SignIn)
-	r.Mux.HandleFunc("GET /logout", controller.Logout)
+	r.Mux.HandleFunc("POST /sign-in", r.Ctl.SignIn)
+	r.Mux.HandleFunc("GET /logout", r.Ctl.Logout)
 
 	r.Mux.HandleFunc("GET /", controller.MainController)
 
