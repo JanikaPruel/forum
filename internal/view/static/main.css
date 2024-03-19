@@ -1,6 +1,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: Arial, sans-serif;
   background: #000000df;
 }
@@ -116,13 +117,18 @@ input[type="search"] {
   padding: 10px;
 }
 
-.icon-button img {
-  height: 60px; /* Или другой размер, который вам подходит */
+.icon-button {
+  /* Удалите любые стили padding или margin, которые могут вызвать проблемы с кликабельностью */
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .user-avatar {
-  border-radius: 50%; /* Делаем аватар круглым */
-  margin-left: 10px;
+  display: block; /* Это должно обеспечить, что вся область изображения реагирует на наведение и клики */
+  width: 100%; /* или другой размер, но убедитесь, что он соответствует icon-button */
 }
 
 /* Стили для эффекта наведения */
@@ -144,19 +150,20 @@ input[type="search"] {
   display: inline-block;
 }
 
-.icon-button {
-  /* ... Стили кнопки ... */
-  padding: 10px; /* Регулируем размер для большей кликабельной области */
-}
 
 .dropdown-content {
   display: none;
   position: absolute;
+  right: 0;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  /* ... */
+  overflow: hidden;
+}
+
+.menu-checkbox:not(:checked) ~ .dropdown-content {
+  display: none;
 }
 
 .dropdown-content a {
@@ -170,7 +177,6 @@ input[type="search"] {
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
-
 
 
 .wrapper {
@@ -335,3 +341,61 @@ background-color: #272729; /* Слегка осветлить фон при на
   width: 100%;
   margin-top: 20px;
 }
+
+#posts {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравнивание постов по центру */
+  margin: 20px auto;
+  background-color: #f8f9fa22; /* Светлый фон для зоны постов */
+  padding: 20px; /* Отступы внутри зоны постов */
+  border-radius: 8px; /* Немного скруглить углы */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для объемности */
+  margin: 20px auto; /* Отступы сверху и снизу, автоматические по бокам */
+  width: 80%; /* Или другой подходящий вам размер */
+  max-width: 800px; /* Максимальная ширина */
+}
+
+/* Стили для поста */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #1a1a1b; /* Цвет фона контентной области */
+}
+
+.post {
+  background-color: #282a2d; /* Цвет фона поста */
+  padding: 15px;
+  margin-bottom: 20px; /* Отступ между постами */
+  border-radius: 8px; /* Скругление углов поста */
+}
+
+.post-title {
+  color: #ffffff; /* Цвет заголовка поста */
+  margin-top: 0;
+}
+
+.post-text {
+  color: #d7dadc; /* Цвет текста поста */
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.post-action {
+  background: none;
+  border: none;
+  color: #d7dadc;
+  cursor: pointer;
+  margin-right: 10px; /* Отступ между кнопками */
+  padding: 5px; /* Отступ внутри кнопки */
+}
+
+.post-action:hover {
+  color: #ffffff; /* Цвет текста кнопки при наведении */
+}
+

@@ -19,7 +19,7 @@
       <input type="search" placeholder="Search Cat : X" aria-label="Search">
     </div>
     <div class="header__right">
-      <button class="icon-button" aria-label="Notifications" onclick="alert('This feature is not ready yet.');" ><img src="/internal/view/static/icons8-напоминания-64.png" alt="Notifications" /></button>
+      <button class="icon-button" aria-label="Notifications" onclick="alert('This feature is not ready yet.');"><img src="/internal/view/static/icons8-напоминания-64.png" alt="Notifications" /></button>
       <label for="create-post-modal-toggle" class="icon-button" aria-label="Create"><img src="/internal/view/static/icons8-плюс-64.png" alt="Create" /></label>
 
       <div class="profile-menu">
@@ -29,16 +29,12 @@
           <span class="dropdown-arrow"></span>
         </label>
         <div class="dropdown-content">
-          {% comment %} <a href="#profile">View Profile</a> {% endcomment %}
-          {% comment %} <a href="#edit-avatar">Edit Avatar</a> {% endcomment %}
-          {% comment %} <a href="#contributor-program">Contributor Program</a> {% endcomment %}
-          {% comment %} <a href="#dark-mode">Dark Mode</a> {% endcomment %}
-          <a href="/logout">Log Out</a>
-          <a href="/logout">Log Out</a>
-          <a href="/logout">Log Out</a>
-          {% comment %} <a href="#advertise">Advertise on Reddit</a> {% endcomment %}
-          {% comment %} <a href="#settings">Settings</a> {% endcomment %}
-          {% comment %} <a href="#premium">Premium</a> {% endcomment %}
+          <a href="/login">Login</a>
+          <a href="#profile" onclick="alert('This feature is not ready yet.');">View Profile</a>
+          <a href="#edit-avatar" onclick="alert('This feature is not ready yet.');">Edit Avatar</a>
+          <a href="#dark-mode" onclick="alert('This feature is not ready yet.');">Light Mode</a>
+          <a href="#settings" onclick="alert('This feature is not ready yet.');">Settings</a>
+          <a href="#premium" onclick="alert('This feature is not ready yet.');">Log out</a>
           <!-- Остальные пункты меню -->
         </div>
       </div>
@@ -112,8 +108,19 @@
         <!-- Другие основные разделы, такие как "RESOURCES" и т.д. -->
       </ul>
     </aside>
-    
   </div>
+
+  <main class="content">
+    <article class="post">
+      <h2 class="post-title">Заголовок поста</h2>
+      <p class="post-text">Текст поста...</p>
+      <div class="post-actions">
+        <button class="post-action" aria-label="Like">👍 Like</button>
+        <button class="post-action" aria-label="Dislike">👎 Dislike</button>
+        <button class="post-action" aria-label="Comment">💬 Comment</button>
+      </div>
+    </article>
+    
     <!-- Чекбокс для открытия модального окна создания поста -->
 <input type="checkbox" id="create-post-modal-toggle" class="modal-toggle">
 
@@ -138,6 +145,5 @@
     </div>
   </div>
 </div>
-
   </body>
 </html> 
