@@ -1,6 +1,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: Arial, sans-serif;
   background: #000000df;
 }
@@ -176,7 +177,6 @@ input[type="search"] {
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
-
 
 
 .wrapper {
@@ -357,12 +357,45 @@ background-color: #272729; /* Слегка осветлить фон при на
   max-width: 800px; /* Максимальная ширина */
 }
 
-.post {
-  background-color: #1a1a1b;
-  color: #d7dadc;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 4px;
-  width: 80%; /* или нужная вам ширина */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+/* Стили для поста */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #1a1a1b; /* Цвет фона контентной области */
 }
+
+.post {
+  background-color: #282a2d; /* Цвет фона поста */
+  padding: 15px;
+  margin-bottom: 20px; /* Отступ между постами */
+  border-radius: 8px; /* Скругление углов поста */
+}
+
+.post-title {
+  color: #ffffff; /* Цвет заголовка поста */
+  margin-top: 0;
+}
+
+.post-text {
+  color: #d7dadc; /* Цвет текста поста */
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.post-action {
+  background: none;
+  border: none;
+  color: #d7dadc;
+  cursor: pointer;
+  margin-right: 10px; /* Отступ между кнопками */
+  padding: 5px; /* Отступ внутри кнопки */
+}
+
+.post-action:hover {
+  color: #ffffff; /* Цвет текста кнопки при наведении */
+}
+

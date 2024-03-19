@@ -107,17 +107,19 @@
         <!-- Другие основные разделы, такие как "RESOURCES" и т.д. -->
       </ul>
     </aside>
-    
-    <section id="posts">
-      <!-- Сервер вставит посты здесь -->
-      <h2>Заголовок поста</h2>
-      <p>Текст поста...</p>
-      <h2>Заголовок поста 2</h2>
-      <p>Текст поста 2...</p>
-    </section>  
-  
-
   </div>
+
+  <main class="content">
+    <article class="post">
+      <h2 class="post-title">Заголовок поста</h2>
+      <p class="post-text">Текст поста...</p>
+      <div class="post-actions">
+        <button class="post-action" aria-label="Like">👍 Like</button>
+        <button class="post-action" aria-label="Dislike">👎 Dislike</button>
+        <button class="post-action" aria-label="Comment">💬 Comment</button>
+      </div>
+    </article>
+    
     <!-- Чекбокс для открытия модального окна создания поста -->
 <input type="checkbox" id="create-post-modal-toggle" class="modal-toggle">
 
