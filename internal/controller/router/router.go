@@ -15,12 +15,14 @@ type Router struct { // Структура для дефолтного или ф
 	// Chi Frame - work
 	// Gin Frame - work
 	// gorillaMux Frame - work
+	Ctl *controller.BaseController
 }
 
 // New constractor - create a new router instance
-func New() *Router {
+func New(ctl *controller.BaseController) *Router {
 	return &Router{
 		Mux: http.NewServeMux(),
+		Ctl: ctl,
 	}
 }
 
@@ -38,9 +40,12 @@ func (r *Router) InitRouter() {
 	fmt.Println("MESSAGE")
 	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
 	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
+	r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
 
-	r.Mux.HandleFunc("POST /sign-up", controller.MainController)
-	r.Mux.HandleFunc("POST /sign-in", controller.MainController)
+	r.Mux.HandleFunc("GET /login", controller.Login)
+	r.Mux.HandleFunc("POST /sign-up", r.Ctl.SignUp)
+	r.Mux.HandleFunc("POST /sign-in", controller.SignIn)
+	r.Mux.HandleFunc("GET /logout", controller.Logout)
 
 	r.Mux.HandleFunc("GET /", controller.MainController)
 

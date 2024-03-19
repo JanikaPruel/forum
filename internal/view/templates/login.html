@@ -32,15 +32,16 @@
 <div class="modal-content" id="signup-modal-content">
   <label for="signup-modal-toggle" class="close">&times;</label>
   <h2>Create an account</h2>
-  <form id="form">
+  <form id="form" action="/sign-up" method="POST">
+   <h4>{{ . }}</h4> 
     <!-- Форма регистрации с полями ввода и кнопкой -->
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your name" class="form-field">
+    <label for="username">Name</label>
+    <input type="text" id="username" name="username" placeholder="Your name" class="form-field" required minlength="5" maxlength="30">
 
     <label for="email">Email</label>
-    <input type="email" id="signup-email" name="email" placeholder="Your email" class="form-field">
+    <input type="email" id="signup-email" name="email" placeholder="Your email" class="form-field" required minlength="6" maxlength="30">
 
-    <label for="dob">Date of birth</label>
+    <!-- <label for="dob">Date of birth</label>
     <div class="dob-inputs">
       <select id="month" name="month" class="form-field">
         <option value="january">January</option>
@@ -55,7 +56,7 @@
         <option value="october">October</option>
         <option value="november">November</option>
         <option value="december">December</option>
-        <!-- Другие месяцы -->
+        Другие месяцы
       </select>
       <select name="day" id="day" class="form-field">
         <option value="1">1</option>
@@ -63,10 +64,10 @@
       <select name="year" id="year" class="form-field">
         <option value="1900">1900</option>
       </select>
-    </div>
+    </div> -->
     <label for="password">Password</label>
-    <input type="password" id="signup-password" name="password" placeholder="Create a password" class="form-field">
-    <button type="submit" class="form-field">Next</button>
+    <input type="password" id="signup-password" name="password" placeholder="Create a password" class="form-field" required minlength="8" maxlength="30">
+    <button type="submit" class="form-field">Sign Up</button>
   </form>
 </div>
 
@@ -80,7 +81,7 @@
 <div class="modal-content" id="signin-modal-content">
   <label for="signin-modal-toggle" class="close">&times;</label>
   <h2>Sign in to Cat - X</h2>
-  <form id="signin-form">
+  <form id="signin-form" action="/sign-in" method="POST">
     <label for="email">Email</label>
     <input type="email" id="signin-email" name="email" placeholder="Enter your email" class="form-field">
 

@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"fmt"
+	"forum/internal/controller"
 	"forum/internal/controller/router"
 	"forum/internal/controller/server"
 	"forum/pkg/config"
@@ -14,11 +15,6 @@ import (
 )
 
 func Run(cfg *config.Config) error {
-
-	// Init router
-	router := router.New()
-	router.InitRouter()
-
 	// Perfect end our application
 
 	// prepare database for connection
@@ -34,6 +30,13 @@ func Run(cfg *config.Config) error {
 		slog.Error(err.Error())
 		return err
 	}
+
+	// controller
+	ctl := controller.New(db)
+
+	// Init router
+	router := router.New(ctl)
+	router.InitRouter()
 
 	slog.Info("Susseccfull to connection data base")
 
@@ -72,17 +75,6 @@ func Run(cfg *config.Config) error {
 		return err
 	}
 	slog.Info("Database connection successfull closed")
+
 	return nil
-	// middleware
-
-	// controller
-
-	// http server
-
-	//start http server
-
-	// syscall signal
-	// close database connnection
-	// stop http server
-
 }

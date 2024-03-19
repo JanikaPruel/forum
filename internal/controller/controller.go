@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"forum/internal/model/repository"
+	"forum/pkg/sqlite"
 	"html/template"
 	"log/slog"
 	"net/http"
@@ -12,6 +14,17 @@ const (
 	loginPage = "/internal/view/templates/login.html"
 	viewDir   = "/internal/view/"
 )
+
+type BaseController struct {
+	Repo *repository.Repository
+}
+
+// New
+func New(db *sqlite.Database) *BaseController {
+	return &BaseController{
+		Repo: repository.New(db),
+	}
+}
 
 func GetTmplFilepath(tmplName string) (tmplFilepath string) {
 	wd, err := os.Getwd()
