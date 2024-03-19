@@ -2,7 +2,6 @@ package controller
 
 import (
 	"fmt"
-	"forum/internal/model"
 	"html/template"
 	"log/slog"
 	"net/http"
@@ -10,6 +9,8 @@ import (
 
 	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/bcrypt"
+
+	"forum/internal/model"
 )
 
 // Login, done
@@ -35,10 +36,9 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(username, email, password)
 	// if user with this email already exists, return error
-	usr, err := ctl.Repo.URepo.GetUserByEmail(email)
-	fmt.Println(usr, err.Error())
-	if err != nil {
-		slog.Error(err.Error())
+	us := ctl.Repo.URepo.GetUserByEmail(email)
+	if us != nil {
+		fmt.Println("USER BEFORE:", us)
 		errMsg := "User with this email, allready exists. Please, try again with another email!"
 		tmp.Execute(w, errMsg)
 		return
@@ -83,13 +83,20 @@ func (ctl *BaseController) SignUp(w http.ResponseWriter, r *http.Request) {
 		Secure:   true,
 	}
 
+	fmt.Println("COOKIE: ", cookie)
+
 	// CreateSession -> userID, sessionID, expires
-	ctl.Repo.URepo.CreateSession(sValue, userID, expires)
+	if err := ctl.Repo.URepo.CreateSession(userID, expires); err != nil {
+		slog.Error(err.Error())
+		errMsg := "Invalid Data. Please, try again!"
+		tmp.Execute(w, errMsg)
+		return
+	}
+
 
 	http.SetCookie(w, cookie)
 
 	// redirect to main page
-	fmt.Println(cookie, userID)
 	http.Redirect(w, r, "GET /", http.StatusSeeOther)
 }
 

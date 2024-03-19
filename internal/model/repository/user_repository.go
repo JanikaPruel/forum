@@ -1,10 +1,13 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
+	"log/slog"
+	"time"
+
 	"forum/internal/model"
 	"forum/pkg/sqlite"
-	"time"
 )
 
 // UserRepository
@@ -20,20 +23,22 @@ func NewUserRepository(db *sqlite.Database) *UserRepository {
 }
 
 // GetUserByEmail
-func (ur *UserRepository) GetUserByEmail(email string) (*model.User, error) {
-	row := ur.DB.SQLite.QueryRow("SELECT id, username, email, password FROM users WHERE email=$1", email)
-
-	user := &model.User{}
-	if err := row.Scan(user.ID, user.Username, user.Email, user.Password); err != nil {
-		return nil, err
+func (ur *UserRepository) GetUserByEmail(email string) *model.User {
+	user := model.User{}
+	err := ur.DB.SQLite.QueryRow("SELECT id, username, email, password, created_at FROM users WHERE email=?", email).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.CreatedAt)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			slog.Error(err.Error())
+		}
+		return nil
 	}
 
-	return user, nil
+	return &user
 }
 
 // CreateUser
 func (ur *UserRepository) CreateUser(user *model.User) (userID int, err error) {
-	res, err := ur.DB.SQLite.Exec("INSERT INTO users (username, email, password) values($1, $2, $3)",
+	res, err := ur.DB.SQLite.Exec("INSERT INTO users (username, email, password) values(?, ?, ?)",
 		user.Username, user.Email, user.Password)
 	if err != nil {
 		return 0, err
@@ -51,14 +56,15 @@ func (ur *UserRepository) CreateUser(user *model.User) (userID int, err error) {
 }
 
 // CreateSession
-func (ur *UserRepository) CreateSession(sessionID string, userID int, expires time.Time) error {
-	res, err := ur.DB.SQLite.Exec("INSERT INTO sessions (id, user_id, expires_at) values($1, $2, $3)",
-		sessionID, userID, expires)
+func (ur *UserRepository) CreateSession(userID int, expires time.Time) error {
+	fmt.Println(userID, expires)
+	res, err := ur.DB.SQLite.Exec("INSERT INTO sessions (user_id, expires) values(?, ?)",
+		userID, expires)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(sessionID, userID, expires)
+	fmt.Println(userID, expires)
 
 	fmt.Println(res.RowsAffected())
 

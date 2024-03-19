@@ -45,48 +45,72 @@ import "time"
 // Но различия есть разумеется
 
 type User struct {
-	ID       int    `sql:"id"`
-	Username string `sql:"username"`
-	Email    string `sql:"email"`
-	Password string `sql:"password"`
+	ID        int       `sql:"id"`
+	Username  string    `sql:"username"`
+	Email     string    `sql:"email"`
+	Password  string    `sql:"password"`
+	CreatedAt time.Time `sql:"created_at"`
 }
 
 type Session struct {
-	ID      int           `sql:"id"`
-	UserID  int           `sql:"username"`
-	Expired time.Duration `sql:"expired"`
+	ID      int       `sql:"id"`
+	UserID  int       `sql:"username"`
+	Expires time.Time `sql:"expired"`
 }
 
 type Category struct {
-	ID        int           `sql:"id"`
-	Title     string        `sql:"title"`
-	CreatedAt time.Duration `sql:"created_at"`
+	ID        int       `sql:"id"`
+	Name      string    `sql:"name"`
+	CreatedAt time.Time `sql:"created_at"`
+}
+
+type TotalLikesPost struct {
+	ID     int `sql:"id"`
+	UserID int `sql:"user_id"`
+	PostID int `sql:"post_id"`
+}
+type TotalDislikesPost struct {
+	ID     int `sql:"id"`
+	UserID int `sql:"user_id"`
+	PostID int `sql:"post_id"`
+}
+type TotalLikesComment struct {
+	ID        int `sql:"id"`
+	UserID    int `sql:"user_id"`
+	CommentID int `sql:"comment_id"`
+}
+type TotalDislikesComment struct {
+	ID        int `sql:"id"`
+	UserID    int `sql:"user_id"`
+	CommentID int `sql:"comment_id"`
 }
 
 type Post struct {
-	ID        int           `sql:"id"`
-	Title     string        `sql:"title"`
-	Content   string        `sql:"content"`
-	Image     string        `sql:"image"`
-	Likes     int           `sql:"likes"`
-	Dislikes  int           `sql:"dislikes"`
-	Views     int           `sql:"views"`
-	UserID    int           `sql:"user_id"`
-	CommentID int           `sql:"post_id"`
-	CreatedAt time.Duration `sql:"created_at"`
-	UpdatedAt time.Duration `sql:"updated_at"`
-	RemovedAt time.Duration `sql:"removed_at"`
+	ID                   int       `sql:"id"`
+	UserID               int       `sql:"user_id"`
+	Username             string    `sql:"username"`
+	Title                string    `sql:"title"`
+	Content              string    `sql:"content"`
+	Category             []int     `sql:"category"`
+	Comment              int       `sql:"comment"`
+	Likes                int       `sql:"likes"`
+	Dislikes             int       `sql:"dislikes"`
+	CreatedAt            time.Time `sql:"created_at"`
+	IsLikedByAuthUser    bool
+	IsDislikedByAuthUser bool
 }
 
 type Comment struct {
-	ID        int           `sql:"id"`
-	UserID    int           `sql:"user_id"`
-	PostID    int           `sql:"post_id"`
-	Content   string        `sql:"content"`
-	Likes     int           `sql:"likes"`
-	Dislikes  int           `sql:"dislikes"`
-	CreatedAt time.Duration `sql:"created_at"`
-	UpdatedAt time.Duration `sql:"updated_at"`
+	ID                   int       `sql:"id"`
+	UserID               int       `sql:"user_id"`
+	PostID               int       `sql:"post_id"`
+	Username             string    `sql:"username"`
+	Content              string    `sql:"content"`
+	Likes                int       `sql:"likes"`
+	Dislikes             int       `sql:"dislikes"`
+	CreatedAt            time.Time `sql:"created_at"`
+	IsLikedByAuthUser    bool
+	IsDislikedByAuthUser bool
 }
 
 // this
