@@ -6,6 +6,7 @@ import "forum/pkg/sqlite"
 type Repository struct {
 	URepo *UserRepository
 	CRepo *CategoryRepository
+	PRepo *PostRepository
 }
 
 // New Repository
@@ -13,5 +14,6 @@ func New(db *sqlite.Database) *Repository {
 	return &Repository{
 		URepo: NewUserRepository(db),
 		CRepo: NewCateforyRepository(db),
+		PRepo: NewPostRepository(db),
 	}
 }

@@ -20,7 +20,7 @@ func NewCateforyRepository(db *sqlite.Database) *CategoryRepository {
 }
 
 // GetCategories
-func (cr *CategoryRepository) GetCategories() (*[]model.Category, error) {
+func (cr *CategoryRepository) GetAllCategories() (*[]model.Category, error) {
 	rows, err := cr.DB.SQLite.Query("SELECT * FROM categories")
 	if err != nil {
 		slog.Error(err.Error())

@@ -9,8 +9,8 @@ import (
 // GetCategories
 func (ctl *BaseController) GetCategories() (categories *[]model.Category, err error) {
 	// get all category from db
-	
-	categories, err = ctl.Repo.CRepo.GetCategories()
+
+	// categories, err = ctl.Repo.CRepo.GetCategories()
 	if err != nil {
 		slog.Error(err.Error())
 	}

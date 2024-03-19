@@ -12,10 +12,10 @@ import (
 )
 
 const (
-	mainPage  = "/internal/view/templates/main.html"
-	loginPage = "/internal/view/templates/login.html"
+	mainPage       = "/internal/view/templates/main.html"
+	loginPage      = "/internal/view/templates/login.html"
 	CategoriesPage = "/internal/view/templates/categories.html"
-	viewDir   = "/internal/view/"
+	viewDir        = "/internal/view/"
 )
 
 type BaseController struct {
@@ -50,17 +50,14 @@ func GetTmplFilepath(tmplName string) (tmplFilepath string) {
 
 type Date struct {
 	Categories []model.Category
-	Posts []model.Post
-	Comments []model.Comment
-	AuthUser model.User
+	Posts      []model.Post
+	Comments   []model.Comment
+	AuthUser   model.User
 }
 
 // MainController
 func MainController(w http.ResponseWriter, r *http.Request) {
 	tmp := template.Must(template.ParseFiles(GetTmplFilepath("main")))
-
-	
-
 
 	if err := tmp.Execute(w, nil); err != nil {
 		slog.Error(err.Error())
