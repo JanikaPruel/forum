@@ -120,6 +120,14 @@ func (ctl *BaseController) SignIn(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ctl *BaseController) Logout(w http.ResponseWriter, r *http.Request) {
+	coockie, err  := r.Cookie("sessionID")
+	if err != nil {
+		slog.Error(err.Error())
+		http.Redirect(w, r, "GET /", http.StatusSeeOther)
+	}
+
+	// get 
+
 
 }
 

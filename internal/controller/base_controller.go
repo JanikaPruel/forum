@@ -57,6 +57,25 @@ type Date struct {
 
 // MainController
 func MainController(w http.ResponseWriter, r *http.Request) {
+	// wd, err := os.Getwd() // /home/kooduser/Kood-tasks/forumV2 + ""
+	// if err != nil {
+	// 	slog.Error(err.Error())
+
+	// }
+	// fmt.Println("WORKDIR: ", wd)
+
+	// auth -> login -> sign-up or sign-in
+	// logout
+
+	// categories
+
+	// posts
+
+	// 
+
+	//  <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
+	//   <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.gok
+
 	tmp := template.Must(template.ParseFiles(GetTmplFilepath("main")))
 
 	if err := tmp.Execute(w, nil); err != nil {
