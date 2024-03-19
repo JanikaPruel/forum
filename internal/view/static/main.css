@@ -15,8 +15,13 @@ body, html {
   border-bottom: 2px solid #444;
 }
 
-.header__left, .header__right {
+.header__left {
   flex: 1;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
 }
 
 .header__logo  {
@@ -102,6 +107,33 @@ input[type="search"] {
 .button:hover {
   background-color: rgba(255, 255, 255, 0.169); /* Делаем фон кнопок темнее при наведении */
   transition: background-color 0.5s; /* Плавное изменение за 0.3 секунды */
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.icon-button img {
+  height: 60px; /* Или другой размер, который вам подходит */
+}
+
+.user-avatar {
+  border-radius: 50%; /* Делаем аватар круглым */
+  margin-left: 10px;
+}
+
+.dropdown-arrow {
+  margin-left: 5px;
+  /* Другие стили для стрелки выпадающего списка, если нужны */
+}
+
+/* Стили для эффекта наведения */
+.icon-button:hover, .profile-menu:hover {
+  background: rgba(192, 192, 192, 0.1);
+  border-radius: 4px;
 }
 
 .wrapper {
