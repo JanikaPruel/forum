@@ -20,7 +20,8 @@
     </div>
     <div class="header__right">
       <button class="icon-button" aria-label="Notifications" onclick="alert('This feature is not ready yet.');" ><img src="/internal/view/static/icons8-напоминания-64.png" alt="Notifications" /></button>
-      <button class="icon-button" aria-label="Create"><img src="/internal/view/static/icons8-плюс-64.png" alt="Create" /></button>
+      <label for="create-post-modal-toggle" class="icon-button" aria-label="Create"><img src="/internal/view/static/icons8-плюс-64.png" alt="Create" /></label>
+
       <div class="profile-menu">
         <img src="/internal/view/static/icons8-пользовательский-по-умолчанию-64.png" alt="User Avatar" class="user-avatar" />
         <span class="dropdown-arrow">▼</span>
@@ -97,5 +98,30 @@
     </aside>
     
   </div>
+    <!-- Чекбокс для открытия модального окна создания поста -->
+<input type="checkbox" id="create-post-modal-toggle" class="modal-toggle">
+
+<!-- Оверлей для модального окна создания поста -->
+<label for="create-post-modal-toggle" class="modal-overlay"></label>
+
+<!-- Модальное окно создания поста -->
+<div class="modal-content" id="create-post-modal-content">
+  <label for="create-post-modal-toggle" class="close">&times;</label>
+  <div class="container">
+    <div id="create-post-container">
+      <h1>Create a new post</h1>
+      <form id="create-post-form" action="/create-post" method="POST">
+        <label for="post-title">Post title</label>
+        <input type="text" id="post-title" name="title" placeholder="Enter a title" required>
+        
+        <label for="post-content">Post text</label>
+        <textarea id="post-content" name="content" placeholder="Enter post text" required></textarea>
+        
+        <button type="submit" class="form-field">Post</button>
+      </form>
+    </div>
+  </div>
+</div>
+
   </body>
 </html> 
