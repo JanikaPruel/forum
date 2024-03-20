@@ -59,14 +59,14 @@ func (r *Router) InitRouter() {
 	// categories
 	r.Mux.HandleFunc("GET /categories", r.Ctl.MainController)
 	r.Mux.HandleFunc("GET /admin/categories/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("POST /admin/categories", r.Ctl.MainController)
+	r.Mux.HandleFunc("POST /admin/categories", r.Ctl.CreatePost)
 	r.Mux.HandleFunc("PUT /admin/categories/{id}", r.Ctl.MainController)
 	r.Mux.HandleFunc("DELETE /admin/catefories/{id}", r.Ctl.MainController)
 
 	// posts
 	r.Mux.HandleFunc("GET  /posts", r.Ctl.MainController)
 	r.Mux.HandleFunc("GET  /posts/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("POST /posts", r.Ctl.MainController)
+	r.Mux.HandleFunc("POST /posts", r.Ctl.CreatePost)
 	r.Mux.HandleFunc("PUT  /posts/id", r.Ctl.MainController)
 	r.Mux.HandleFunc("DELETE  /posts/{id}", r.Ctl.MainController)
 

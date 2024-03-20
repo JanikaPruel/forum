@@ -20,14 +20,14 @@ func NewCateforyRepository(db *sqlite.Database) *CategoryRepository {
 }
 
 // GetAllCategories
-func (cr *CategoryRepository) GetAllCategories() ([]model.Category, error) {
+func (cr *CategoryRepository) GetAllCategories() ([]*model.Category, error) {
 	rows, err := cr.DB.SQLite.Query("SELECT id, name FROM categories")
 	if err != nil {
 		slog.Error(err.Error())
 		return nil, err
 	}
 	defer rows.Close()
-	categories := []model.Category{}
+	categories := []*model.Category{}
 
 	for rows.Next() {
 		category := model.Category{}
@@ -35,7 +35,7 @@ func (cr *CategoryRepository) GetAllCategories() ([]model.Category, error) {
 			slog.Error(err.Error())
 			continue
 		}
-		categories = append(categories, category)
+		categories = append(categories, &category)
 
 	}
 

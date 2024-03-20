@@ -22,7 +22,7 @@ func NewPostRepository(db *sqlite.Database) *PostRepository {
 }
 
 // CreatePost
-func (pr *PostRepository) CreatePost(post model.Post) (categoryID int, err error) {
+func (pr *PostRepository) CreatePost(post model.Post) (ID int, err error) {
 	res, err := pr.DB.SQLite.Exec("INSERT INTO posts (user_id, title, content, likes, dislikes, created_at) VALUES (?, ?, ?, ?, ?, ?)",
 		post.UserID, post.Title, post.Content, post.Likes, post.Dislikes, post.CreatedAt)
 	if err != nil {
@@ -108,6 +108,40 @@ func (pr *PostRepository) GetPostsByUserID(userID int) (posts []*model.Post, err
 		posts = append(posts, &post)
 	}
 	return posts, nil
+}
+
+func (pr *PostRepository) GetAllPostLikesByUserID(userID int) []*model.TotalLikesPost {
+	like := []*model.TotalLikesPost{}
+	tabl, err := pr.DB.SQLite.Query("SELECT post_id, user_id FROM total_likes_post WHERE user_id = ?", userID)
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	defer tabl.Close()
+	for tabl.Next() {
+		row := model.TotalLikesPost{}
+		if err := tabl.Scan(&row.PostID, &row.UserID); err != nil {
+			return nil
+		}
+		like = append(like, &row)
+	}
+	return like
+}
+
+func (pr *PostRepository) GetAllPostDislikesByUserID(userID int) []*model.TotalDislikesPost {
+	dis := []*model.TotalDislikesPost{}
+	tabl, err := pr.DB.SQLite.Query("SELECT post_id, user_id FROM total_dislikes_post WHERE user_id = ?", userID)
+	if err != nil {
+		slog.Error(err.Error())
+	}
+	defer tabl.Close()
+	for tabl.Next() {
+		row := model.TotalDislikesPost{}
+		if err := tabl.Scan(&row.PostID, &row.UserID); err != nil {
+			return nil
+		}
+		dis = append(dis, &row)
+	}
+	return dis
 }
 
 // GetPostByID
