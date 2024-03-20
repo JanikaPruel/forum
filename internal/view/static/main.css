@@ -181,6 +181,8 @@ input[type="search"] {
 
 .wrapper {
   display: flex;
+  min-height: 100vh;
+  background: #000000df; /* Фон всей страницы */
 }
 
 .sidebar {
@@ -356,46 +358,3 @@ background-color: #272729; /* Слегка осветлить фон при на
   width: 80%; /* Или другой подходящий вам размер */
   max-width: 800px; /* Максимальная ширина */
 }
-
-/* Стили для поста */
-.content {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: #1a1a1b; /* Цвет фона контентной области */
-}
-
-.post {
-  background-color: #282a2d; /* Цвет фона поста */
-  padding: 15px;
-  margin-bottom: 20px; /* Отступ между постами */
-  border-radius: 8px; /* Скругление углов поста */
-}
-
-.post-title {
-  color: #ffffff; /* Цвет заголовка поста */
-  margin-top: 0;
-}
-
-.post-text {
-  color: #d7dadc; /* Цвет текста поста */
-}
-
-.post-actions {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-
-.post-action {
-  background: none;
-  border: none;
-  color: #d7dadc;
-  cursor: pointer;
-  margin-right: 10px; /* Отступ между кнопками */
-  padding: 5px; /* Отступ внутри кнопки */
-}
-
-.post-action:hover {
-  color: #ffffff; /* Цвет текста кнопки при наведении */
-}
-

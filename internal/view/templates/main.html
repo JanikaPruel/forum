@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main / Cat - X</title>
     <link rel="stylesheet" href="../static/main.css">
-  <link rel="icon" type="image/png" sizes="16x16" href="/home/kooduser/Kood-tasks/forumV2/internal/view/static/favicon/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/home/kooduser/Kood-tasks/forumV2/internal/view/static/favicon/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/home/kooduser/Kood-tasks/forumV2/internal/view/static/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/internal/view/static/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/internal/view/static/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/internal/view/static/favicon/apple-touch-icon.png">
      <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
           <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.go
 </head>
@@ -15,19 +15,19 @@
   <header class="header">
     <div class="header__logo"></div>
     <a href="#" onclick="location.reload(true);">
-      <img src="/internal/view/static/icons8-кот-64.png" alt="logo">
+      <img src="/internal/view/static/icon/cat64x64.png" alt="logo">
     </a>
     <div class="header__search">
       <input type="search" placeholder="Search Cat : X" aria-label="Search">
     </div>
     <div class="header__right">
-      <button class="icon-button" aria-label="Notifications" onclick="alert('This feature is not ready yet.');"><img src="/internal/view/static/icons8-напоминания-64.png" alt="Notifications" /></button>
-      <label for="create-post-modal-toggle" class="icon-button" aria-label="Create"><img src="/internal/view/static/icons8-плюс-64.png" alt="Create" /></label>
+      <button class="icon-button" aria-label="Notifications" onclick="alert('This feature is not ready yet.');"><img src="/internal/view/static/icon/notification64x64.png" alt="Notifications" /></button>
+      <label for="create-post-modal-toggle" class="icon-button" aria-label="Create"><img src="/internal/view/static/icon/create64x64.png" alt="Create" /></label>
 
       <div class="profile-menu">
         <input type="checkbox" id="user-menu" class="menu-checkbox" />
         <label for="user-menu" class="icon-button" aria-label="User Menu">
-          <img src="/internal/view/static/icons8-пользовательский-по-умолчанию-64.png" alt="User Avatar" class="user-avatar" />
+          <img src="/internal/view/static/icon/profile64x64.png" alt="User Avatar" class="user-avatar" />
           <span class="dropdown-arrow"></span>
         </label>
         <div class="dropdown-content">
@@ -37,8 +37,7 @@
           <a href="#dark-mode" onclick="alert('This feature is not ready yet.');">Light Mode</a>
           <a href="#settings" onclick="alert('This feature is not ready yet.');">Settings</a>
           <a href="#premium" onclick="alert('This feature is not ready yet.');">Log out</a>
-          <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
-          <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.go
+         
         </div>
       </div>
     </div>
@@ -111,18 +110,11 @@
         <!-- Другие основные разделы, такие как "RESOURCES" и т.д. -->
       </ul>
     </aside>
+    <main id="posts">
+      <!-- Сюда будет вставляться контент постов -->
+  </main>
   </div>
 
-  <main class="content">
-    <article class="post">
-      <h2 class="post-title">Заголовок поста</h2>
-      <p class="post-text">Текст поста...</p>
-      <div class="post-actions">
-        <button class="post-action" aria-label="Like">👍 Like</button>
-        <button class="post-action" aria-label="Dislike">👎 Dislike</button>
-        <button class="post-action" aria-label="Comment">💬 Comment</button>
-      </div>
-    </article>
     
     <!-- Чекбокс для открытия модального окна создания поста -->
 <input type="checkbox" id="create-post-modal-toggle" class="modal-toggle">
