@@ -127,7 +127,17 @@ func (pr *PostRepository) GetAllPostLikesByUserID(userID int) []*model.TotalLike
 	return like
 }
 
-func (pr *PostRepository) GetAllPostDislikesByUserID(userID int) []*model.TotalDislikesPost {
+func (pr *PostRepository) GetAllPostDislikesByUserID(userID, postID int) model.TotalDislikesPost {
+	dis := model.TotalDislikesPost{}
+	err := pr.DB.SQLite.QueryRow("SELECT post_id, user_id FROM total_dislikes_post WHERE user_id = ? AND post_id = ?", userID, postID).
+		Scan(&dis.PostID, &dis.UserID)
+	if err != nil {
+		return model.TotalDislikesPost{}
+	}
+	return dis
+}
+
+func (pr *PostRepository) GetAllPostDislikesByUserIDs(userID int) []*model.TotalDislikesPost {
 	dis := []*model.TotalDislikesPost{}
 	tabl, err := pr.DB.SQLite.Query("SELECT post_id, user_id FROM total_dislikes_post WHERE user_id = ?", userID)
 	if err != nil {
@@ -145,18 +155,38 @@ func (pr *PostRepository) GetAllPostDislikesByUserID(userID int) []*model.TotalD
 }
 
 // GetPostByID
-func (pr *PostRepository) GetPostBy(postId int) (*model.Post, error) {
-	post := model.Post{}
+func (pr *PostRepository) GetPostByID(postID int) *model.Post {
+	row, err := pr.DB.SQLite.Query("SELECT * FROM posts WHERE id=?", postID)
+	// row, err := pr.DB.SQLite.Query("SELECT p.id, ///p.user_id, p.title, p.content, p.likes, p.dislikes, p.created_at, u.username posts AS p LEFT JOIN users AS u ON p.user_id = u.id WHERE p.id = ?", postID)
+	// err := pr.DB.SQLite.QueryRow("SELECT id, user_id, title, content, likes, dislikes FROM posts WHERE id=?", postID).
+	// Scan(&post.ID, &post.UserID, &post.Title, &post.Content, &post.Likes, &post.Dislikes)
+	defer row.Close()
+	if err == nil {
+		for row.Next() {
+			p := model.Post{}
+			err := row.Scan(&p.ID, &p.UserID, &p.Title, &p.Content, &p.Likes, &p.Dislikes, &p.CreatedAt, &p.Username)
+			if err != nil {
+				fmt.Println("ERROR DB, err:", err.Error())
+				continue
+			}
+			if p.ID == postID {
+				return &p
+			}
+		}
+	}
+	return nil
+}
 
-	err := pr.DB.SQLite.QueryRow("SELECT p.id, p.user_id, p.title, p.content, p.likes, p.dislikes, p.created_at, u.username FROM posts AS p LEFT JOIN users AS u ON p.user_id = u.id WHERE p.id = ?",
-		postId).Scan(&post.ID, &post.UserID, &post.Title, &post.Content, &post.Likes, &post.Dislikes, &post.CreatedAt, &post.Username)
+func (pr *PostRepository) GetAllPostData(postId int) *model.Post {
+	var p model.Post
+	err := pr.DB.SQLite.QueryRow("SELECT p.id, p.user_id, p.title, p.content, p.likes, p.dislikes, p.created_at, u.username FROM posts AS p LEFT JOIN users AS u ON p.user_id = u.id WHERE p.id = ?", postId).Scan(&p.ID, &p.UserID, &p.Title, &p.Content, &p.Likes, &p.Dislikes, &p.CreatedAt, &p.Username)
 	if err != nil {
 		if err != sql.ErrNoRows {
-			slog.Error(err.Error())
+			fmt.Println("Get all post data failed: " + err.Error())
 		}
-		return nil, err
+		return nil
 	}
-	return &post, nil
+	return &p
 }
 
 // UpdatePostByID

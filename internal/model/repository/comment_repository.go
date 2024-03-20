@@ -79,6 +79,60 @@ func (comr *CommentRepository) GetCommentsByUserID(userId int) ([]*model.Comment
 	return comments, nil
 }
 
+func (comr *CommentRepository) GetCommentLikesByUserID(userID, commentID int) model.TotalLikesComment {
+	totlike := model.TotalLikesComment{}
+	err := comr.DB.SQLite.QueryRow("SELECT comment_id, user_id FROM total_likes_comment WHERE user_id = ? AND comment_id = ?", userID, commentID).
+		Scan(&totlike.CommentID, &totlike.UserID)
+	if err != nil {
+		return model.TotalLikesComment{}
+	}
+	return totlike
+}
+
+func (comr *CommentRepository) GetCommentDislikesByUserID(userID, commentID int) model.TotalDislikesComment {
+	var totdis model.TotalDislikesComment
+	err := comr.DB.SQLite.QueryRow("SELECT comment_id, user_id FROM total_dislikes_comment WHERE user_id = ? AND comment_id = ?", userID, commentID).
+		Scan(&totdis.CommentID, &totdis.UserID)
+	if err != nil {
+		return model.TotalDislikesComment{}
+	}
+	return totdis
+}
+
+func (comr *CommentRepository) GetAllCommentLikesByUserID(userID int) []*model.TotalLikesComment {
+	totlike := []*model.TotalLikesComment{}
+	tabl, err := comr.DB.SQLite.Query("SELECT comment_id, user_id FROM total_likes_comment WHERE user_id = ?", userID)
+	if err != nil {
+		fmt.Println("GetAllCommentLikesByUserID failed: " + err.Error())
+	}
+	defer tabl.Close()
+	for tabl.Next() {
+		row := model.TotalLikesComment{}
+		if err := tabl.Scan(&row.CommentID, &row.UserID); err != nil {
+			return nil
+		}
+		totlike = append(totlike, &row)
+	}
+	return totlike
+}
+
+func (comr *CommentRepository) GetAllCommentDislikesByUserID(userID int) []*model.TotalDislikesComment {
+	dis := []*model.TotalDislikesComment{}
+	tabl, err := comr.DB.SQLite.Query("SELECT comment_id, user_id FROM total_dislikes_comment WHERE user_id = ?", userID)
+	if err != nil {
+		fmt.Println("GetAllCommentDislikesByUserID failed: " + err.Error())
+	}
+	defer tabl.Close()
+	for tabl.Next() {
+		row := model.TotalDislikesComment{}
+		if err := tabl.Scan(&row.CommentID, &row.UserID); err != nil {
+			return nil
+		}
+		dis = append(dis, &row)
+	}
+	return dis
+}
+
 // GetCommentByID
 func (comr *CommentRepository) GetCommentByID(commentId int) (*model.Comment, error) {
 	com := model.Comment{}

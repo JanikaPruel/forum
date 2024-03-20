@@ -55,7 +55,7 @@ func (cr *CategoryRepository) GetCategoryByID(categoryID int) (category model.Ca
 }
 
 // GetCategoriesByPostID
-func (cr *CategoryRepository) GetCategoriesByPostId(postID int) (categories []*model.Category, err error) {
+func (cr *CategoryRepository) GetCategoriesByPostID(postID int) (categories []*model.Category, err error) {
 	rows, err := cr.DB.SQLite.Query("SELECT categories.id, categories.name FROM post_categories INNER JOIN categories ON post_categories.category_id = categories.id WHERE post_categories.post_id = ?", postID)
 	if err != nil {
 		slog.Error(err.Error())

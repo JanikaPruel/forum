@@ -146,10 +146,10 @@ func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request
 
 	for i, post := range posts {
 		previewContent := ctl.GeneratePreviewContent(post.Content, 100)
-		categories, _ := ctl.Repo.CRepo.GetCategoriesByPostId(post.ID)
+		categories, _ := ctl.Repo.CRepo.GetCategoriesByPostID(post.ID)
 		comments, _ := ctl.Repo.ComRepo.GetCommentsByPostID(post.ID)
 		postLikes := len(ctl.Repo.PRepo.GetAllPostLikesByUserID(post.UserID))
-		postDislikes := len(ctl.Repo.PRepo.GetAllPostDislikesByUserID(post.UserID))
+		postDislikes := len(ctl.Repo.PRepo.GetAllPostDislikesByUserIDs(post.UserID))
 		author, _ := ctl.Repo.URepo.GetUserByID(post.UserID)
 		authUser := ctl.GetAuthUser(r)
 		authUserID := 0
