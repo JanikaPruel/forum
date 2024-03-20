@@ -1,5 +1,12 @@
 # forum
 
+***We welcome you to our forum!***
+***At the moment our project is not in the form we wanted it to be, but due to the tight deadline we are putting it up like this.***
+
+**To start the project, all you need to do is write:** 
+```
+Make
+```
 ## Objectives
 ## This project consists in creating a web forum that allows :
 
@@ -70,19 +77,6 @@ For the forum project you must use Docker. You can read about docker basics in t
 - bcrypt
 - UUID
 
-**You must not use use any frontend libraries or frameworks like React, Angular, Vue etc.** - front-end = MVVM, Desktop - MVP, f+b = MVC, SPA - server
+**You must not use use any frontend libraries or frameworks like React, Angular, Vue etc.** 
 
-## This project will help you learn about:
-
-**The basics of web :**
-
-- HTML
-- HTTP
-- Sessions and cookies
-- Using and setting up Docker
-- Containerizing an application
-- Compatibility/Dependency
-- Creating images
-- SQL language
-- Manipulation of databases
-- The basics of encryption
+## Authors - Janika Pruel & Daniil Mjodov
