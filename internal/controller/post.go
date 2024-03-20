@@ -304,3 +304,38 @@ func (ctl *BaseController) SortCommentsByDate(comments []*model.Comment) {
 		return comments[i].CreatedAt.After(comments[j].CreatedAt)
 	})
 }
+
+// DeletePost
+func (ctl *BaseController) DeletePost(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
+	}
+
+	postIDStr := r.FormValue("post-id")
+	postID, err := strconv.Atoi(postIDStr)
+	if err != nil {
+		http.Error(w, "Invalid post ID", http.StatusBadRequest)
+		return
+	}
+
+	currentUser := ctl.GetAuthUser(r)
+	if currentUser == nil {
+		return
+	}
+
+	posts, _ := ctl.Repo.PRepo.GetAllPosts()
+	post := model.Post{}
+
+	for _, pos := range posts {
+		if pos.ID == postID {
+			post = *pos
+		}
+	}
+
+	post.Username = currentUser.Username
+
+	ctl.Repo.PRepo.DeletePost(postID)
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

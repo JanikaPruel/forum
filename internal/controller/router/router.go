@@ -57,24 +57,20 @@ func (r *Router) InitRouter() {
 	r.Mux.HandleFunc("GET /", r.Ctl.MainController)
 
 	// categories
-	r.Mux.HandleFunc("GET /categories", r.Ctl.MainController)
-	r.Mux.HandleFunc("GET /admin/categories/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("POST /admin/categories", r.Ctl.CreatePost)
-	r.Mux.HandleFunc("PUT /admin/categories/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("DELETE /admin/catefories/{id}", r.Ctl.MainController)
+	// r.Mux.HandleFunc("GET /categories", r.Ctl.MainController)
+	// r.Mux.HandleFunc("GET /admin/categories/{id}", r.Ctl.MainController)
+	// r.Mux.HandleFunc("POST /admin/categories", r.Ctl.CreatePost)
+	// r.Mux.HandleFunc("PUT /admin/categories/{id}", r.Ctl.MainController)
+	// r.Mux.HandleFunc("DELETE /admin/catefories/{id}", r.Ctl.MainController)
 
 	// posts
 	r.Mux.HandleFunc("GET /post", r.Ctl.ViewPostByID)
 	r.Mux.HandleFunc("POST /posts", r.Ctl.CreatePost)
-	// r.Mux.HandleFunc("PUT  /posts/id", r.Ctl.MainController)
-	// r.Mux.HandleFunc("DELETE  /posts/{id}", r.Ctl.MainController)
+	r.Mux.HandleFunc("POST /delete-post", r.Ctl.DeletePost)
 
 	// comments
-	r.Mux.HandleFunc("GET /comments", r.Ctl.MainController)
-	r.Mux.HandleFunc("GET /comments/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("POST /comments", r.Ctl.MainController)
-	r.Mux.HandleFunc("PUT /comments/{id}", r.Ctl.MainController)
-	r.Mux.HandleFunc("DELETE /comments/{id}", r.Ctl.MainController)
+	r.Mux.HandleFunc("POST /comment", r.Ctl.CreateComment)
+	r.Mux.HandleFunc("POST /delete-comment", r.Ctl.DeleteComment)
 
 	// likes
 	r.Mux.HandleFunc("GET /comments/{id}/like", r.Ctl.MainController)
