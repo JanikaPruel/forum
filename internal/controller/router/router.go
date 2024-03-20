@@ -73,12 +73,12 @@ func (r *Router) InitRouter() {
 	r.Mux.HandleFunc("POST /delete-comment", r.Ctl.DeleteComment)
 
 	// likes
-	r.Mux.HandleFunc("GET /comments/{id}/like", r.Ctl.MainController)
-	r.Mux.HandleFunc("GET /post/{id}/like", r.Ctl.MainController)
+	r.Mux.HandleFunc("GET /like-comment", r.Ctl.AddLikeInComment)
+	r.Mux.HandleFunc("GET /like-post", r.Ctl.AddLikeInPost)
 
 	// dislikes
-	r.Mux.HandleFunc("GET /comments/{id}/dislike", r.Ctl.MainController)
-	r.Mux.HandleFunc("GET /post/{id}/dislike", r.Ctl.MainController)
+	r.Mux.HandleFunc("GET /dislike-comment", r.Ctl.AddLikeInComment)
+	r.Mux.HandleFunc("GET /dislike-post", r.Ctl.AddDislikeInPost)
 
 } // 1.22
 

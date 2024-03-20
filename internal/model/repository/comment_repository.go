@@ -56,6 +56,18 @@ func (comr *CommentRepository) GetCommentsByPostID(postID int) ([]*model.Comment
 	return coms, nil
 }
 
+func (comr *CommentRepository) GetAllCommentData(commentId int) *model.Comment {
+	com := model.Comment{}
+	err := comr.DB.SQLite.QueryRow("SELECT id, post_id, user_id, content, likes, dislikes, created_at FROM comments WHERE id = ?", commentId).Scan(&com.ID, &com.PostID, &com.UserID, &com.Content, &com.Likes, &com.Dislikes, &com.CreatedAt)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			slog.Error(err.Error())
+		}
+		return nil
+	}
+	return &com
+}
+
 // GetCommentsByUserID
 func (comr *CommentRepository) GetCommentsByUserID(userId int) ([]*model.Comment, error) {
 	comRows, err := comr.DB.SQLite.Query("SELECT id, post_id, user_id, content, likes, dislikes, created_at FROM comments WHERE user_id = ?", userId)

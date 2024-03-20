@@ -25,7 +25,6 @@ type BaseController struct {
 	Repo *repository.Repository
 }
 
-// New
 func New(db *sqlite.Database) *BaseController {
 	return &BaseController{
 		Repo: repository.New(db),
@@ -49,6 +48,13 @@ func GetTmplFilepath(tmplName string) (tmplFilepath string) {
 		tmplFilepath = wd + viewDir
 	}
 	return tmplFilepath
+}
+
+type Reaction struct {
+	ID     int    `json:"id"`
+	MarkID string `json:"mark_id"`
+	UserID int    `json:"user_id"`
+	Mark   string `json:"mark"`
 }
 
 type Data struct {

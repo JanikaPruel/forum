@@ -6,7 +6,6 @@ import (
 	"net/http"
 )
 
-// Handles the error, generates an error message and sends it to the user
 func (ctl *BaseController) ErrorController(w http.ResponseWriter, statusCode int, Info string) {
 	tmpl := template.Must(template.ParseFiles(GetWD() + "/web/templates/error.html"))
 

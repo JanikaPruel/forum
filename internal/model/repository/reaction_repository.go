@@ -102,6 +102,26 @@ func (re *ReactionRepository) GetAllCommentDislikesByUserID(userID int) ([]*mode
 	return totdis, nil
 }
 
+func (re *ReactionRepository) GetPostLikesByUserID(userID, postID int) model.TotalLikesPost {
+	like := model.TotalLikesPost{}
+	err := re.DB.SQLite.QueryRow("SELECT post_id, user_id FROM total_likes_post WHERE user_id = ? AND post_id = ?", userID, postID).
+		Scan(&like.PostID, &like.UserID)
+	if err != nil {
+		return model.TotalLikesPost{}
+	}
+	return like
+}
+
+func (re *ReactionRepository) GetPostDislikesByUserID(userID, postID int) model.TotalDislikesPost {
+	dis := model.TotalDislikesPost{}
+	err := re.DB.SQLite.QueryRow("SELECT post_id, user_id FROM total_dislikes_post WHERE user_id = ? AND post_id = ?", userID, postID).
+		Scan(&dis.PostID, &dis.UserID)
+	if err != nil {
+		return model.TotalDislikesPost{}
+	}
+	return dis
+}
+
 // GetLikedCommentsByUserID
 func (re *ReactionRepository) GetLikedCommentsByUserID(userID int) ([]*model.Comment, error) {
 	rows, err := re.DB.SQLite.Query("SELECT c.id, c.user_id, c.post_id, c.content, c.likes, c.dislikes FROM comments c JOIN total_likes_comment lc ON c.id = lc.comment_id WHERE lc.user_id = ?", userID)
@@ -122,6 +142,20 @@ func (re *ReactionRepository) GetLikedCommentsByUserID(userID int) ([]*model.Com
 	return comments, nil
 }
 
+func (re *ReactionRepository) InsertPostLike(postLike model.TotalLikesPost) {
+	_, err := re.DB.SQLite.Exec("INSERT OR IGNORE INTO total_likes_post (post_id, user_id) VALUES (?, ?)", postLike.PostID, postLike.UserID)
+	if err != nil {
+		slog.Error(err.Error())
+	}
+}
+
+func (re *ReactionRepository) InsertPostDislike(postLike model.TotalLikesPost) {
+	_, err := re.DB.SQLite.Exec("INSERT OR IGNORE INTO total_dislikes_post (post_id, user_id) VALUES (?, ?)", postLike.PostID, postLike.UserID)
+	if err != nil {
+		slog.Error(err.Error())
+	}
+}
+
 // RemoveCommentLikesByUserID
 func (re *ReactionRepository) RemoveCommentLikesByUserID(userID, commentID int) error {
 	_, err := re.DB.SQLite.Exec("DELETE FROM total_likes_comment WHERE user_id = ? AND comment_id = ?", userID, commentID)
@@ -134,6 +168,22 @@ func (re *ReactionRepository) RemoveCommentLikesByUserID(userID, commentID int) 
 // RemoveCommentDislikesByUserID
 func (re *ReactionRepository) RemoveCommentDislikesByUserID(userID, commentID int) error {
 	_, err := re.DB.SQLite.Exec("DELETE FROM total_dislikes_comment WHERE user_id = ? AND comment_id = ?", userID, commentID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (re *ReactionRepository) RemovePostLikesByUserID(userID, postID int) error {
+	_, err := re.DB.SQLite.Exec("DELETE FROM total_likes_post WHERE user_id = ? AND post_id = ?", userID, postID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (re *ReactionRepository) RemovePostDislikesByUserID(userID, postID int) error {
+	_, err := re.DB.SQLite.Exec("DELETE FROM total_dislikes_post WHERE user_id = ? AND post_id = ?", userID, postID)
 	if err != nil {
 		return err
 	}
