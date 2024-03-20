@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forum</title>
+  <link rel="stylesheet" href="../static/main.css">
 </head>
 <body>
  <header>
@@ -26,7 +27,7 @@
   {{if .UserID}}
     <div >
       <form action="/posts" method="POST">
-        <button id="submit" type="submit" style="color=blue">Create a new cool Post!</button>
+        <button id="submit" type="submit">Create a new cool Post!</button>
       </form>
   {{end}}
   <div>

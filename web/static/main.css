@@ -1,0 +1,82 @@
+/* Сброс стилей для всего документа */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Arial', sans-serif;
+    color: white; /* Цвет текста на странице */
+    background-color: #333; /* Цвет фона страницы */
+}
+  
+/* Стиль для header */
+header {
+    background-color: #222; /* Темнее фон для шапки */
+    padding: 1rem;
+}
+  
+/* Стилизация ссылок в шапке */
+header a {
+    color: white;
+    text-decoration: none;
+}
+  
+/* Стили для контейнера с категориями */
+.category-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20%; /* Ширина блока категорий */
+    background: #444; /* Фон блока категорий */
+    height: 100vh; /* Высота на всю высоту экрана */
+    padding: 20px; /* Отступы внутри блока */
+}
+
+/* Контейнер для постов, который будет в центре */
+div#posts {
+margin-left: 20%; /* Отступ слева, чтобы не перекрывать категории */
+padding: 1rem;
+width: 60%; /* Ширина контента */
+background-color: #555; /* Цвет фона для постов */
+min-height: 100vh; /* Минимальная высота */
+}
+
+/* Стиль для подвала (footer) */
+footer {
+background-color: #222; /* Темнее фон для подвала */
+padding: 1rem;
+color: white;
+position: fixed;
+bottom: 0;
+width: 100%;
+}
+
+/* Общий стиль для кнопок */
+button {
+background-color: #777; /* Цвет фона для кнопок */
+color: white; /* Цвет текста для кнопок */
+border: none;
+padding: 0.5rem 1rem;
+margin: 0.5rem;
+cursor: pointer;
+}
+
+/* Стилизация чекбоксов и их меток */
+input[type="checkbox"] + label {
+display: block;
+margin: 0.5rem 0;
+}
+
+/* Стилизация форм */
+form {
+margin-bottom: 1rem;
+}
+
+/* Стили для ссылок */
+a {
+    color: white; /* Цвет текста ссылок */
+    text-decoration: none; /* Убрать подчеркивание */
+  }
+  
