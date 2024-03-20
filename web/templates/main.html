@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum</title>
+</head>
+<body>
+ <header>
+    <div>
+          <a href="/"></a>
+          <div>
+            {{if .UserID}}
+            <button><a id="username" href="/user/{{.UserID.Username}}">Hi X - Cat's user {{.UserID.Username}}</a></button>
+            <form action="/logout" method="get" style="display:inline;">
+              <button type="submit">Logout</button>
+            </form>
+            {{else}}
+            <button><a href="/sign-up" style="display:inline;">Sign Up</a></button>
+            <button><a href="/sign-in" style="display:inline;">Sign In</a></button>
+            {{end}}
+          </div>
+        </div>
+  </header>
+  <h1>X - Cat ||| Bugmakers Team Present !</h1>
+  {{if .UserID}}
+    <div >
+      <form action="/posts" method="POST">
+        <button id="submit" type="submit" style="color=blue">Create a new cool Post!</button>
+      </form>
+  {{end}}
+  <div>
+    <div>
+      <h3>Sort By</h3>
+  <form action="/" method="get">
+      <h3 >Category</h3>
+      <form action="/" method="get">
+        {{range .Categories}}
+        <div>
+          <input type="checkbox" name="categories" value="{{.ID}}" id="category-{{.ID}}">
+          <label for="category-{{.ID}}">{{.Name}}</label>
+        </div>
+        {{end}}<br>
+        <button type="submit">Apply filters</button>
+      </form>
+    </div>
+    <div >
+      <form action="/" method="get">
+        <input type="textarea"  name="search" placeholder="Write a title of a post">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>  
+  <div >
+    <div>
+      <div>
+        {{range .Posts}}
+        <div onclick="window.location.href='/post?post_id={{.Post.ID}}'">
+          <div>
+            <h3>{{.Author.Username}}</h3>
+          </div>
+          <a href="/post?post_id={{.Post.ID}}"><h2>{{.Post.Title}}</h2></a><br>
+          <div>
+            <p>{{.PreviewContent}}</p>
+          </div><br>
+          <div>
+            <p>{{.PreviewCategories}}</p>
+          </div>
+          <div>
+            <form action="/like-post" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleLikePost(this);">
+              <input type="hidden" name="post_id" value="{{.Post.ID}}">
+              {{if .Post.IsLikedByAuthUser}}
+              <button>
+                <img src="/static/favicon/good-dog.png" alt="like">
+              </button >
+              {{else}}
+              <button>
+                <img src="/static/favicon/not-good-dog.png" alt="like">
+              </button>
+              {{end}}
+            </form>
+            <span>{{.Post.Likes}}</span>
+            <form action="/dislike-post" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleDislikePost(this);">
+              <input type="hidden" name="post_id" value="{{.Post.ID}}">
+              {{if .Post.IsDislikedByAuthUser}}
+              <button>
+                <img src="/static/favicon/disman.png" alt="dislike">
+              </button>
+              {{else}}
+              <button>
+                <img src="/static/favicon/not-human.png" alt="dislike">
+              </button>
+              {{end}}
+            </form>
+            <span >{{.Post.Dislikes}}</span>            
+          </div>
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
+  <script>
+    function handleLikePost(form) {
+      const url = new URL(form.action);
+      const postID = form.querySelector('input[name="post_id"]').value;
+      url.searchParams.append('post_id', postID);
+      fetch(url)
+        .then(response => response.text())
+        .then(() => {
+          location.reload();
+        });
+    }
+    function handleDislikePost(form) {
+      const url = new URL(form.action);
+      const postID = form.querySelector('input[name="post_id"]').value;
+      url.searchParams.append('post_id', postID);
+  
+      fetch(url)
+        .then(response => response.text())
+        .then(() => {
+          location.reload();
+        });
+    }
+  </script>  
+    <footer class="footer-dummy">
+    <a href="#" onclick="alert('Autors: Janika Pruel && Daniil Mjodov'); return false;">About us</a>
+    <a href="#" onclick="alert('Someday we will make it.'); return false;">Download the Cat - X app</a>
+    <a href="#" onclick="alert('+372 58 317 117 - Daniil'); return false;">Help Center</a>
+    <a href="#" onclick="alert('We will steal all your data '); return false;">Privacy Policy</a>
+    <a href="#" onclick="alert('Sugar is bad for your health'); return false;">Cookie Policy</a>
+    <a href="#" onclick="alert('https://github.com/Pruel'); return false;">Blog</a>
+    <a href="#" onclick="alert('https://github.com/JanikaPruel'); return false;">Marketing</a>
+    <a href="#" onclick="alert('Fake link for project'); return false;">Cat - X for Business</a>
+    <a href="#" onclick="alert('Our team: BugMakers'); return false;">Developers</a>
+  </footer>
+</body>
+</html>

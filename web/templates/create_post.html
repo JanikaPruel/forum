@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/" ></a>
+            <div >
+                {{if .UserID}}
+                <button ><a id="username" href="/user/{{.UserID.Username}}">Hello
+                        {{.UserID.Username}}</a></button>
+                <form id="logout-form" action="/logout" method="post" style="display:inline;">
+                    <button type="submit">Log Out</button>
+                </form>
+                {{else}}
+                <button><a href="/register" style="display:inline;">Register</a></button>
+                <button><a href="/login" style="display:inline;">Log In</a></button>
+                {{end}}
+            </div>
+        </div>
+    </header>
+    <h1>Create a new post</h1>
+    <div class="main-wrapper">
+        <form id="create-post-form" action="/posts" method="POST">
+            <div >
+                <h3><label for="post-title">Title</label></h3>
+                <input type="text" name="post-title" id="post-title" placeholder="Write a title"
+                    required minlength="5" maxlength="100"><br>
+            </div><br>
+            <div >
+                <p >
+                    {{.Message}}
+                </p>
+                <h3 >Category</h3>
+                {{range .Categories}}
+                <div >
+                    <input type="checkbox" name="category-create-post[]" value="{{.ID}}" id="category-{{.ID}}">
+                    <label for="category-{{.ID}}">{{.Name}}</label><br>
+                </div>
+                {{end}}
+            </div> <br>
+            <div >
+                <h3><label for="post-content">Content</label></h3>
+                <textarea name="post-content" id="post-content" placeholder="Write a content" required minlength="10"
+                    maxlength="1500"></textarea><br>
+            </div>
+            <p>{{.Message}}</p>
+            <div >
+                <button type="submit"  value="Create post">Create post</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

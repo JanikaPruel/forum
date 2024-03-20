@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Post.Title}}</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/"></a>
+            <div>
+                {{if .UserID}}
+                <button><a id="username" href="/user/{{.UserID.Username}}">Hello
+                        {{.UserID.Username}}</a></button>
+                <form id="logout-form" action="/logout" method="post" style="display:inline;">
+                    <button type="submit">Logout</button>
+                </form>
+                {{else}}
+                <button><a href="/sign-up" style="display:inline;">Sign Up</a></button>
+                <button><a href="/sign-in" style="display:inline;">Sign In</a></button>
+                {{end}}
+            </div>
+        </div>
+    </header>
+    <div>
+        <div>
+            <div>
+                <h3>{{.Post.Username}}</h3>
+              </div>
+              <h1>{{.Post.Title}}</h1>
+              <p>{{.Post.Content}}</p>
+              <div>
+                {{range .Categories}}
+                <span>{{.Name}}</span>
+                {{end}}
+            </div>
+            <div>
+                <form action="/like-post" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleLikePost(this);">
+                    <input type="hidden" name="post_id" value="{{.Post.ID}}">
+                    {{if .Post.IsLikedByAuthUser}}
+                    <button class="btn_like">
+                      <img src="/static/fovicon/some.png" alt="like">
+                    </button>
+                    {{else}}
+                    <button class="btn_not_like">
+                      <img src="/static/favicon/some.png" alt="like">
+                    </button>
+                    {{end}}
+                  </form>
+                <span>{{.Post.Likes}}</span>
+                <form action="/dislike-post" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleDislikePost(this);">
+                    <input type="hidden" name="post_id" value="{{.Post.ID}}">
+                    {{if .Post.IsDislikedByAuthUser}}
+                    <button>
+                      <img src="/static/favicon/badboy.png" alt="dislike">
+                    </button>
+                    {{else}}
+                    <button>
+                      <img src="/static/favicon/crezy-dog.png" alt="dislike">
+                    </button>
+                    {{end}}
+                  </form>
+                <span >{{.Post.Dislikes}}</span>
+              </div>
+              <div>
+                  {{if eq .AuthUserID .Post.UserID}}
+                      <form action="/delete-post" method="post" style="display:inline;">
+                          <input type="hidden" name="post-id" value="{{.Post.ID}}">
+                          <button type="submit" class="delete1">Delete Post!</button>
+                      </form>
+                  {{end}}
+              </div>
+            <div>
+                <p>Published at: {{.CreatedAt.Format "1995-10-13 3:04:05"}}</p>
+            </div>
+        </div>
+        <div >
+            <div>
+                {{if .AuthUserID}}
+                <div>
+                    <form action="/comment" method="post">
+                        <input type="hidden" name="post_id" value="{{.Post.ID}}">
+                        <textarea name="comment_content" placeholder=" Add a comment" required minlength="2" maxlength="500"></textarea><br>
+                        <button type="submit">Add comment</button>
+                    </form>
+                </div>
+                {{end}}
+            </div>
+            <div>
+                {{range .Comments}}
+                <div>
+                    <div>
+                        <h3>{{.Username}}</h3>
+                    </div>
+                    <p>{{.Content}}</p>
+                    <div>
+                        <form action="/like-comment" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleLikeComment(this);">
+                            <input type="hidden" name="comment_id" value="{{.ID}}">
+                            {{if .IsLikedByAuthUser}}
+                            <button>
+                              <img src="/static/favicon/goodboy.png" alt="like" class="icon_like">
+                            </button>
+                            {{else}}
+                            <button>
+                              <img src="/static/favicon/not-liked-dog.png" alt="like" class="icon_like">
+                            </button>
+                            {{end}}
+                          </form>
+                        <span>{{.Likes}}</span>
+                        <form action="/dislike-comment" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleDislikeComment(this);">
+                            <input type="hidden" name="comment_id" value="{{.ID}}">
+                            {{if .IsDislikedByAuthUser}}
+                            <button>
+                              <img src="/static/favicon/damage.png" alt="dislike">
+                            </button>
+                            {{else}}
+                            <button>
+                              <img src="/static/badman.png" alt="dislike">
+                            </button>
+                            {{end}}
+                        </form>
+                        <span >{{.Dislikes}}</span>
+                      </div>
+                      <div>
+                          {{if eq $.AuthUserID .UserID}}
+                          <form action="/delete-comment" method="post" style="display:inline;">
+                              <input type="hidden" name="comment_id" value="{{.ID}}">
+                              <button type="submit">Delete comment</button>
+                          </form>
+                          {{end}}
+                      </div><br>
+                      <div>
+                        <p>Published at: {{.CreatedAt.Format "1970-01-01 15:04:05"}}</p>
+                      </div>
+                    </div>
+                    {{end}}
+                  </div><br>
+        </div>
+    </div>
+    <script>
+        function handleLikePost(form) {
+          const url = new URL(form.action);
+          const postID = form.querySelector('input[name="post_id"]').value;
+          url.searchParams.append('post_id', postID);
+          fetch(url)
+            .then(response => response.text())
+            .then(() => {
+              location.reload();
+            });
+        }
+        function handleDislikePost(form) {
+          const url = new URL(form.action);
+          const postID = form.querySelector('input[name="post_id"]').value;
+          url.searchParams.append('post_id', postID);
+          fetch(url)
+            .then(response => response.text())
+            .then(() => {
+              location.reload();
+            });
+        }
+        function handleLikeComment(form) {
+          const url = new URL(form.action);
+          const postID = form.querySelector('input[name="comment_id"]').value;
+          url.searchParams.append('comment_id', postID);
+          fetch(url)
+            .then(response => response.text())
+            .then(() => {
+              location.reload();
+            });
+        }
+        function handleDislikeComment(form) {
+          const url = new URL(form.action);
+          const postID = form.querySelector('input[name="comment_id"]').value;
+          url.searchParams.append('comment_id', postID);
+          fetch(url)
+            .then(response => response.text())
+            .then(() => {
+              location.reload();
+            });
+        }
+      </script>  
+</body>
+</html>

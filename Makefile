@@ -21,10 +21,10 @@ run: race
 	go run -v cmd/forum/main.go
 
 build_docker_image:
-	bash ./scripts/build_image.sh
+	bash build_image.sh
 
 remove_container_and_image:
-	bash ./scripts/remove_container_and_image.sh
+	bash remove_container_and_image.sh
 
 
 .DEFAULT_GOAL := run
