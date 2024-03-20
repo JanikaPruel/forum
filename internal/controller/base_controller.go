@@ -52,19 +52,12 @@ type Data struct {
 	Categories []model.Category
 	Posts      []*model.Post
 	Comments   []model.Comment
-	User       *model.User
+	UserID     *model.User
 	Cookie     *http.Cookie
 }
 
 // MainController
 func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request) {
-	// wd, err := os.Getwd() // /home/kooduser/Kood-tasks/forumV2 + ""
-	// if err != nil {
-	// 	slog.Error(err.Error())
-
-	// }
-	// fmt.Println("WORKDIR: ", wd)
-
 	// auth -> login -> sign-up or sign-in
 	// logout
 
@@ -82,20 +75,27 @@ func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request
 	cookie, _ := r.Cookie("sissionID")
 
 	user := ctl.GetAuthUser(r)
-	if user != nil 
-
-	//  <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/view/static/icons8-кот-64.png
-	//   <!-- Остальные пункты меню --> /home/kooduser/Kood-tasks/forumV2/internal/controller/base_controller.gok
+	if user == nil {
+		slog.Error("user is nil, underfind")
+	}
+	// us := &model.User{
+	// 		ID:       1,
+	// 		Username: "USER",
+	// 		Email:    "user@user.com",
+	// 		Password: "asdajslkdjqlkwejlqkwje",
+	// }
 
 	// DATA
 	data := Data{
 		Categories: categories,
 		Posts:      posts,
-		// User:       user,
-		Cookie: cookie,
+		UserID:     user,
+		Cookie:     cookie,
 	}
 
-	tmp := template.Must(template.ParseFiles(GetTmplFilepath("main")))
+	wd, _ := os.Getwd()
+
+	tmp := template.Must(template.ParseFiles(wd + "/web/templates/main.html"))
 
 	if err := tmp.Execute(w, data); err != nil {
 		slog.Error(err.Error())

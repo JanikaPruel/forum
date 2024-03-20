@@ -39,12 +39,18 @@ func (r *Router) InitRouter() {
 	fmt.Println(controller.GetTmplFilepath("main"))
 	fmt.Println(controller.GetTmplFilepath("login"))
 	fmt.Println("MESSAGE")
-	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
-	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
+	// r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
+	// r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
+	// r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
+
+	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/web/templates/"))))
+	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/web/static/"))))
 	// r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
 
 	r.Mux.HandleFunc("GET /login", controller.Login)
+	r.Mux.HandleFunc("GET /sign-up", r.Ctl.SignUpPage)
 	r.Mux.HandleFunc("POST /sign-up", r.Ctl.SignUp)
+	r.Mux.HandleFunc("GET /sign-in", r.Ctl.SignInPage)
 	r.Mux.HandleFunc("POST /sign-in", r.Ctl.SignIn)
 	r.Mux.HandleFunc("GET /logout", r.Ctl.Logout)
 
