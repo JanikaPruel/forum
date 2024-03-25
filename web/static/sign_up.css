@@ -1,0 +1,93 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: white; /* Цвет текста на странице */
+    background-color: #333; /* Цвет фона страницы */
+}
+
+body a {
+    text-decoration: none;
+}
+
+/* Стили для контейнера формы, чтобы центрировать его на странице */
+form {
+    display: block;
+    position: relative;
+    margin: 50px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: #333;
+    border-radius: 8px;
+  }
+  
+  /* Стили для заголовков в форме */
+  h1 {
+    text-align: center;
+    color: white;
+  }
+  
+  /* Правила для стилизации полей ввода, которые уже у вас есть */
+  input[type=text],
+  input[type=email],
+  input[type=password] {
+    width: calc(100% - 24px); /* Подгонка под padding */
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+  }
+  
+  /* Стилизация кнопки отправки формы */
+  input[type=submit] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #555;
+    color: white;
+    font-size: 16px;
+  }
+  
+  /* Центрирование кнопки и ссылки для входа */
+  input[type=submit],
+  p {
+    text-align: center;
+  }
+  
+  /* Ссылка на вход */
+  p a {
+    color: #5599ff;
+  }
+  
+  /* Адаптируем форму под мобильные устройства */
+  @media screen and (max-width: 600px) {
+    form {
+      width: 90%;
+      margin: 20px auto;
+    }
+  }
+  
+/* Стили для кнопки регистрации */
+input[type=submit] {
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: background-color 0.3s ease; /* Плавное изменение фона */
+  }
+  
+  input[type=submit]:hover {
+    background-color: #666; /* Цвет фона при наведении */
+    /* Измените значение цвета на предпочитаемое */
+  }
+  
+  /* Стили для ссылки входа */
+  p a {
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: color 0.3s ease; /* Плавное изменение цвета текста */
+  }
+  
+  p a:hover {
+    color: #2d5faa; /* Цвет текста при наведении */
+    /* Измените значение цвета на предпочитаемое */
+  }
+  

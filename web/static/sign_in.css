@@ -1,0 +1,80 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: white; /* Цвет текста на странице */
+    background-color: #333; /* Цвет фона страницы */
+}
+
+body a {
+    text-decoration: none;
+}
+
+/* Стили для заголовка формы */
+h1 {
+    text-align: center;
+    color: white;
+  }
+  
+  /* Стили для формы, чтобы центрировать её на странице */
+  form {
+    display: block;
+    position: relative;
+    margin: 50px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: #333;
+    border-radius: 8px;
+  }
+  
+  /* Стили для полей ввода */
+  input[type=email],
+  input[type=password] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+  }
+  input[type=submit],
+  p {
+    text-align: center;
+  }
+  
+  /* Стили для кнопки отправки формы */
+  input[type=submit] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #555;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #666; /* Цвет фона при наведении */
+  }
+  
+  /* Стили для ссылки регистрации */
+  p a {
+    color: #5599ff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  p a:hover {
+    color: #2d5faa; /* Цвет текста при наведении */
+  }
+  
+  /* Адаптация формы под мобильные устройства */
+  @media screen and (max-width: 600px) {
+    form {
+      width: 90%;
+      margin: 20px auto;
+    }
+  }
+  
