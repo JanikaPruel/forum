@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Scope One", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #333;
+    line-height: 1.6;
+}
+
+/* HEADER */
+header {
+    background: #222;
+    color: #fff;
+    padding: 7px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_logo img, .profile-button img {
+    transition: box-shadow 0.3s ease-in-out;
+    border-radius: 50%;
+}
+
+.header_logo img:hover, .profile-button img:hover {
+    box-shadow: 0 0 15px rgba(82, 80, 233, 0.5); /* Синее свечение для примера */
+    border-radius: 50%; /* Если иконка круглая, это усилит эффект свечения */
+}
+
+.header_search {
+    position: relative; /* Makes the parent relative for absolute positioning of children */
+}
+
+.search-icon {
+    position: absolute; /* Absolute position within the .header_search */
+    left: 10px; /* Adjust based on padding of the input */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    height: 20px; /* Adjust based on the size of your icon */
+    pointer-events: none; /* Makes the icon non-interactive */
+}
+
+.header_search input[type="search"] {
+    padding-left: 40px; /* Add padding to prevent text from hiding behind the icon */
+    /* ... остальные стили инпута */
+}
+
+.header_search input[type="search"] {
+    border-radius: 20px; /* Gives a rounded shape to the search bar */
+    padding: 10px 37px; /* Adjust padding to increase the text area */
+    background-color: #333; /* Sets a dark background for the search bar */
+    border: 1px solid #444; /* Defines a border to create depth */
+    color: #ffffffd7;
+    outline: none;
+    font-size: 18px; /* Sets a readable font size */
+    width: 500px; /* Adjust the width as needed */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+    transition: all 0.2s ease-in-out; /* Smoothens the transition effect */
+}
+
+.header_search input[type="search"]:hover, 
+.header_search input[type="search"]:focus {
+    background-color: #444; /* Darkens the search bar a little on hover/focus */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); /* Increases the shadow to highlight */
+}
+
+.header_search input[type="search"]::placeholder {
+    color: #bbb; /* Lightens the placeholder text */
+}
+
+/* This removes the webkit-specific cancel button that might appear in the search input */
+input[type="search"]::-webkit-search-cancel-button {
+    display: none; 
+}
+
+.header-profile {
+    position: relative;
+}
+
+.profile-button {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    width: 200px; /* Adjust as needed */
+    display: none;
+}
+
+.profile-toggle:checked ~ .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown li a {
+    color: white;
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.profile-dropdown li a:hover {
+    background-color: #333;
+}
+
+/* MAIN */ 
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #333;
+  min-height: 100vh;
+}
+
+.create-post {
+  background-color: #222;
+  color: #ddd;
+  border-radius: 4px;
+  width: 600px; /* Adjust as needed */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.create-post-header h1 {
+  margin-bottom: 20px;
+}
+
+.post-form .form-section {
+  margin-bottom: 10px;
+}
+
+.post-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.post-form input[type="text"],
+.post-form select,
+.post-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: white;
+}
+
+.post-form textarea {
+  height: 100px; /* Adjust as needed */
+}
+
+.post-form button {
+  background-color: #0079d3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-form button:hover {
+  background-color: #005999;
+}

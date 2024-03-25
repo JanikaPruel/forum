@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* Выравнивание элементов по горизонтали */
+    align-items: self-end; /* Выравнивание элементов по вертикали */
+    background: url('/web/static/error.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    color: white;
+    font-family: "Scope One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  /* Стили для текста сообщения об ошибке */
+  .error-message {
+    position: absolute;
+    left: 5%; /* Отступ слева */
+    top: 50%; /* Центрирование по вертикали */
+    transform: translateY(-50%); /* Сдвиг для точного центрирования по вертикали */
+    font-size: 1.80em;
+  }
+  
+  /* Стили для ссылки на главную страницу */
+  .main-page-link {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.80em; /* Увеличить размер шрифта */
+    color: #ffffff;
+    text-decoration: none; /* Убрать подчеркивание ссылки */
+    padding: 12px 40px; /* Добавить внутренние отступы */
+    border-radius: 15px; /* Скруглить углы */
+    box-shadow: 2px 2px 4px #000000; /* Добавить тень к ссылке */
+    transition: all 0.3s ease; /* Анимация для плавности эффектов */
+    background: none;
+    transition: background-color 0.6s, color 0.6s;
+  }
+  
+  .main-page-link:hover {
+    background-color: #fff;
+    color: #000;
+    border-color: transparent;
+  }

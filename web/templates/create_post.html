@@ -1,58 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="/web/static/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/web/static/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/web/static/favicon/apple-touch-icon.png">
+    <link rel="stylesheet" href="../static/create_post.css">
     <title>Forum</title>
 </head>
 <body>
-    <header>
-        <div>
-            <a href="/" ></a>
-            <div >
-                {{if .UserID}}
-                <button ><a id="username" href="/user/{{.UserID.Username}}">Hello
-                        {{.UserID.Username}}</a></button>
-                <form id="logout-form" action="/logout" method="post" style="display:inline;">
-                    <button type="submit">Log Out</button>
-                </form>
-                {{else}}
-                <button><a href="/register" style="display:inline;">Register</a></button>
-                <button><a href="/login" style="display:inline;">Log In</a></button>
-                {{end}}
-            </div>
+    <header class="header"> 
+        <div class="header_logo">
+            <a href="/">
+                <img src="/web/static/icon/logo.png" alt="logo">
+            </a>
+        </div>
+        <div class="header_search">
+            <img  src="/web/static/icon/loupe.png" alt="Search" class="search-icon">
+            <input type="search" placeholder="Search : Cat - X">
+        </div>
+        <div class="header_profile">
+            <input type="checkbox" id="profile-toggle" class="profile-toggle" hidden>
+            <label for="profile-toggle" class="profile-button">
+                <img  src="/web/static/icon/profile.png" alt="profile"> 
+            </label>
+            <ul class="profile-dropdown">
+                <li><a href="#" onclick="alert('This feature not ready');">Profile</a></li>
+                <li><a href="#" onclick="alert('This feature not ready');">Premium</a></li>
+                <li><a href="#" onclick="alert('This feature not ready');">User Settings</a></li>
+            </ul>
         </div>
     </header>
-    <h1>Create a new post</h1>
-    <div class="main-wrapper">
-        <form id="create-post-form" action="/posts" method="POST">
-            <div >
-                <h3><label for="post-title">Title</label></h3>
-                <input type="text" name="post-title" id="post-title" placeholder="Write a title"
-                    required minlength="5" maxlength="100"><br>
-            </div><br>
-            <div >
-                <p >
-                    {{.Message}}
-                </p>
-                <h3 >Category</h3>
-                {{range .Categories}}
-                <div >
-                    <input type="checkbox" name="category-create-post[]" value="{{.ID}}" id="category-{{.ID}}">
-                    <label for="category-{{.ID}}">{{.Name}}</label><br>
-                </div>
-                {{end}}
-            </div> <br>
-            <div >
-                <h3><label for="post-content">Content</label></h3>
-                <textarea name="post-content" id="post-content" placeholder="Write a content" required minlength="10"
-                    maxlength="1500"></textarea><br>
+    <main class="main-content">
+        <div class="create-post">
+            <div class="create-post-header">
+              <h1>Create a post and choose your category </h1>
             </div>
-            <p>{{.Message}}</p>
-            <div >
-                <button type="submit"  value="Create post">Create post</button>
+            <div class="post-form">
+              <div class="form-section">
+                <select id="community" name="category">
+                    {{range .Categories}}
+                        <option value="category-{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
             </div>
-        </form>
-    </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
