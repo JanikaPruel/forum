@@ -26,7 +26,7 @@
         </div>
     </header>
     <div>
-        <div>
+        <div class="post-content">
             <div>
                 <h3>{{.Post.Username}}</h3>
               </div>
@@ -37,7 +37,7 @@
                 <span>{{.Name}}</span>
                 {{end}}
             </div>
-            <div>
+            <div class="post-actions">
                 <form action="/like-post" method="get" style="display:inline;" onsubmit="event.preventDefault(); handleLikePost(this);">
                     <input type="hidden" name="post_id" value="{{.Post.ID}}">
                     {{if .Post.IsLikedByAuthUser}}
@@ -80,7 +80,7 @@
         <div >
             <div>
                 {{if .AuthUserID}}
-                <div>
+                <div class="comments-section">
                     <form action="/comment" method="post">
                         <input type="hidden" name="post_id" value="{{.Post.ID}}">
                         <textarea name="comment_content" placeholder=" Add a comment" required minlength="2" maxlength="500"></textarea><br>
@@ -89,10 +89,10 @@
                 </div>
                 {{end}}
             </div>
-            <div>
+            <div class="comments-container">
                 {{range .Comments}}
                 <div>
-                    <div>
+                    <div class="comment">
                         <h3>{{.Username}}</h3>
                     </div>
                     <p>{{.Content}}</p>

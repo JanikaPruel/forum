@@ -1,93 +1,116 @@
-/* Общие стили для текста и фона */
 body {
-    background: #333; /* Темный фон для всей страницы */
-    color: white; /* Белый текст на темном фоне */
+    background: #1a1a1b; /* Темный фон для всей страницы */
+    color: #d7dadc; /* Светлый текст на темном фоне */
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрирование содержимого по горизонтали */
-    min-height: 100vh; /* Минимальная высота страницы */
-    justify-content: center; /* Центрирование содержимого по вертикали */
-  }
-  
-  /* Стили для заголовков */
-  h1, h3 {
-    text-align: center;
-  }
-  
-  /* Стили для форм и кнопок */
-  button, input[type=submit], .btn_like, .btn_not_like {
-    cursor: pointer;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 10px;
-    background: #555;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover, input[type=submit]:hover {
-    background-color: #666;
-  }
-  
-  /* Стили для ссылок */
-  a, .delete1 {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  a:hover, .delete1:hover {
-    color: #66aaff;
-  }
-  
-  /* Стили для контейнера с содержимым поста */
-  .post-content {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  /* Стили для отображения категорий */
-  .categories span {
-    background: #555;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 5px;
-  }
-  
-  /* Стили для комментариев */
-  .comment {
-    margin-top: 20px;
-    padding: 15px;
-    background: #444; /* Немного более светлый фон для комментариев */
-    border-radius: 8px;
-  }
-  
-  .comment h3 {
     margin: 0;
-    padding-bottom: 10px;
-  }
-  
-  /* Стили для иконок лайка и дизлайка */
-  .btn_like, .btn_not_like {
-    width: 24px; /* Примерный размер иконок */
-    height: 24px;
-    margin-right: 5px;
-  }
-  
-  /* Адаптация под мобильные устройства */
-  @media screen and (max-width: 600px) {
-    .post-content, .comment {
-      margin: 10px;
-      padding: 10px;
-    }
-  }
-  
-.post-meta {
+    padding-top: 50px; /* Отступ сверху для header */
+}
+
+header {
+    background: #1a1a1b;
+    border-bottom: 1px solid #343536;
+    width: 100%;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+header > div {
+    max-width: 900px; /* Ограничиваем ширину для большего контроля над layout */
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+}
+
+/* Установим ширину и центрирование для основного контента */
+.post-content {
+    background: #272729;
+    margin: 20px auto; /* Автоматические отступы слева и справа для центрирования */
+    padding: 20px;
+    max-width: 900px; /* Ширина, аналогичная header для консистентности */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Отдельные элементы внутри post-content могут быть стилизованы дополнительно */
+
+/* Стили для раздела с комментариями */
+.comments-section {
+    background: #272729;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px; /* Та же ширина, что и для post-content */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Стили для контейнера комментариев */
+.comments-container {
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.comment {
+    border-top: 1px solid #343536; /* Разделение комментариев */
+    /* padding-top: 10px; */
+    margin-top: 10px;
+    /* margin: 20px auto; */
+    padding: 10px;
+    max-width: 900px; /* Та же ширина, что и для post-content */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ... Остальные стили ... */
+/* Стили для навигационных ссылок и кнопок в шапке */
+header a, header button {
+    color: #8c8f91;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+header a:hover, header button:hover {
+    text-decoration: underline;
+}
+
+/* Стили для кнопок и форм */
+button, input[type="submit"], .btn_like, .btn_not_like {
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 1px solid #343536;
+    background: #1a1a1b;
+    color: #d7dadc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    border-color: #5694ff; /* Синий цвет при наведении */
+    color: #5694ff;
+}
+
+/* Стили для ссылок */
+a, .delete1 {
+    color: #5694ff; /* Синий цвет ссылок */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, .delete1:hover {
+    color: #1a73e8; /* Более темный синий цвет при наведении */
+}
+
+textarea {
+    width: 95%; /* Позволяет textarea занимать всю ширину контейнера */
+    padding: 10px; /* Добавляет внутренние отступы */
+    border: 1px solid #343536; /* Граница, сочетающаяся со стилем страницы */
+    background-color: #1a1a1b; /* Цвет фона */
+    color: #d7dadc; /* Цвет текста */
+    border-radius: 4px; /* Скругление углов */
+    resize: none; /* Отключает возможность изменения размера пользователем */
+    min-height: 50px; /* Минимальная высота */
+    overflow-y: hidden; /* Скрывает вертикальный скроллбар */
 }
