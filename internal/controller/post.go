@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"html/template"
 	"log/slog"
 	"net/http"
@@ -27,6 +26,11 @@ type PostData struct {
 // CreataPost | POST /posts
 func (ctl *BaseController) CreatePost(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles(GetWD() + "/web/templates/create_post.html"))
+
+	if r.URL.Path != "/posts" {
+		ctl.ErrorController(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+		return
+	}
 
 	user := ctl.GetAuthUser(r)
 	logged := false
@@ -174,10 +178,8 @@ func (ctl *BaseController) SortPostsByDate(posts []*model.Post) {
 
 // ViewPostByID
 func (ctl *BaseController) ViewPostByID(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("VIEW POST")
 	if !strings.HasPrefix(r.URL.Path, "/post") {
 		ctl.ErrorController(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
-		fmt.Println("THIS HERE VIEW")
 		return
 	}
 

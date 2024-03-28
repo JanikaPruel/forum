@@ -85,6 +85,12 @@ func (ctl *BaseController) MainController(w http.ResponseWriter, r *http.Request
 	wd, _ := os.Getwd()
 	tmp := template.Must(template.ParseFiles(wd + "/web/templates/main.html"))
 
+	// Error test
+	// if r.URL.Path != "/" {
+	// 	ctl.ErrorController(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+	// 	return
+	// }
+
 	// auth -> login -> sign-up or sign-in
 	// logout
 

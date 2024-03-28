@@ -2,11 +2,10 @@ package router
 
 import (
 	"fmt"
+	"forum/internal/controller"
 	"log/slog"
 	"net/http"
 	"os"
-
-	"forum/internal/controller"
 )
 
 // route structure <- serveMux - stdlib
@@ -39,13 +38,10 @@ func (r *Router) InitRouter() {
 	fmt.Println(controller.GetTmplFilepath("main"))
 	fmt.Println(controller.GetTmplFilepath("login"))
 	fmt.Println("MESSAGE")
-	// r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/internal/view/templates/"))))
-	// r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/internal/view/static/"))))
-	// r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
 
 	r.Mux.Handle("GET /templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir(wd+"/web/templates/"))))
 	r.Mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir(wd+"/web/static/"))))
-	// r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
+	r.Mux.Handle("GET /favicon/", http.StripPrefix("/favicon/", http.FileServer(http.Dir(wd+"/internal/view/static/favicon/"))))
 
 	r.Mux.HandleFunc("GET /login", controller.Login)
 	r.Mux.HandleFunc("GET /sign-up", r.Ctl.SignUpPage)
@@ -63,20 +59,23 @@ func (r *Router) InitRouter() {
 	// r.Mux.HandleFunc("PUT /admin/categories/{id}", r.Ctl.MainController)
 	// r.Mux.HandleFunc("DELETE /admin/catefories/{id}", r.Ctl.MainController)
 
-	// posts
+	// Error
+	// r.Mux.HandleFunc("GET /error", r.ctl.ErrorController)
+
+	// Posts
 	r.Mux.HandleFunc("GET /post", r.Ctl.ViewPostByID)
 	r.Mux.HandleFunc("POST /posts", r.Ctl.CreatePost)
 	r.Mux.HandleFunc("POST /delete-post", r.Ctl.DeletePost)
 
-	// comments
+	// Comments
 	r.Mux.HandleFunc("POST /comment", r.Ctl.CreateComment)
 	r.Mux.HandleFunc("POST /delete-comment", r.Ctl.DeleteComment)
 
-	// likes
+	// Likes
 	r.Mux.HandleFunc("GET /like-comment", r.Ctl.AddLikeInComment)
 	r.Mux.HandleFunc("GET /like-post", r.Ctl.AddLikeInPost)
 
-	// dislikes
+	// Dislikes
 	r.Mux.HandleFunc("GET /dislike-comment", r.Ctl.AddLikeInComment)
 	r.Mux.HandleFunc("GET /dislike-post", r.Ctl.AddDislikeInPost)
 

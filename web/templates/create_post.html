@@ -2,50 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="16x16" href="/web/static/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/web/static/favicon/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/web/static/favicon/apple-touch-icon.png">
     <link rel="stylesheet" href="../static/create_post.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="..static/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png">
     <title>Forum</title>
 </head>
 <body>
     <header class="header"> 
         <div class="header_logo">
             <a href="/">
-                <img src="/web/static/icon/logo.png" alt="logo">
+                <img src="static/icon/logo.png" alt="logo">
             </a>
         </div>
         <div class="header_search">
-            <img  src="/web/static/icon/loupe.png" alt="Search" class="search-icon">
+            <img  src="static/icon/loupe.png" class="search-icon">
             <input type="search" placeholder="Search : Cat - X">
         </div>
         <div class="header_profile">
             <input type="checkbox" id="profile-toggle" class="profile-toggle" hidden>
             <label for="profile-toggle" class="profile-button">
-                <img  src="/web/static/icon/profile.png" alt="profile"> 
+                <img  src="static/icon/profile.png" alt="profile"> 
             </label>
             <ul class="profile-dropdown">
                 <li><a href="#" onclick="alert('This feature not ready');">Profile</a></li>
                 <li><a href="#" onclick="alert('This feature not ready');">Premium</a></li>
                 <li><a href="#" onclick="alert('This feature not ready');">User Settings</a></li>
+                <li><a href="/">Main page</a></li>
             </ul>
         </div>
     </header>
     <main class="main-content">
         <div class="create-post">
             <div class="create-post-header">
-              <h1>Create a post and choose your category </h1>
+                <h1>Create a post and choose your category </h1>
             </div>
-            <div class="post-form">
-              <div class="form-section">
-                <select id="community" name="category">
-                    {{range .Categories}}
-                        <option value="category-{{.ID}}">{{.Name}}</option>
-                    {{end}}
-                </select>
-            </div>
-            </div>
+            <form id="create-post-form" action="/posts" method="POST" class="post-form">
+                <div class="form-section">
+                    <h3><label for="community">Category</label></h3>
+                    <select id="community" name="category-create-post[]">
+                        {{range .Categories}}
+                            <option value="{{.ID}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+                <div class="create-post-title">
+                    <h3><label for="post-title">Title</label></h3>
+                    <input type="text" name="post-title" id="post-title" placeholder="Write a title" required minlength="5" maxlength="100" class="post-title-input">
+                </div>
+                <div class="create-post-text">
+                    <label for="post-content"><h3>Text (optional)</h3></label>
+                    <textarea name="post-content" id="post-content" placeholder="Text (optional)" class="post-textarea" required minlength="10"></textarea>
+                </div>
+                <div class="create-post-footer">
+                    <button type="submit" class="post-submit-btn">Post</button>
+                </div>
+            </form>             
         </div>
     </main>
 </body>

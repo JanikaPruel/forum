@@ -1,8 +1,10 @@
 package config
 
 import (
+	"bufio"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"forum/pkg/serror"
 	"os"
 	"strings"
@@ -126,15 +128,45 @@ func setup(cfg *Config) (*Config, error) {
 // Чувствительный данные их храним в переменных окружения ОС.
 // setConfigParamsFromEnv
 func setConfigParamsFromEnv(cfg *Config) (*Config, error) {
+
 	_, exist := os.LookupEnv("SERVER_HOST")
 	if !exist {
-		return nil, errors.New("error, env not exists")
+		// TODO: load .env
+		if err := loadAndSetEnv(); err != nil {
+			return nil, fmt.Errorf("error, env not exists: %w", err)
+		}
 	}
 
 	cfg.HTTPServer.Host = os.Getenv("SERVER_HOST")
 	cfg.HTTPServer.Port = os.Getenv("SERVER_PORT")
 
 	return cfg, nil
+}
+
+// loadAndSetEnv ...
+func loadAndSetEnv() error {
+	file, err := os.Open(".env")
+	if err != nil {
+		return err
+	}
+
+	sc := bufio.NewScanner(file)
+
+	for sc.Scan() {
+		if line := sc.Text(); line != "" {
+			line := sc.Text()
+			evnSlice := strings.Split(line, "=")
+
+			envKey := evnSlice[0]
+			envValue := evnSlice[1]
+
+			if err := os.Setenv(envKey, envValue); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
 }
 
 // parseConfigFileAndSetConfigParams

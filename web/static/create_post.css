@@ -7,18 +7,20 @@ body {
     font-family: "Scope One", serif;
     font-weight: 400;
     font-style: normal;
-    background-color: #333;
+    background-color: #000000f1;
     line-height: 1.6;
+    overflow-y: hidden;
 }
 
 /* HEADER */
 header {
     background: #222;
     color: #fff;
-    padding: 7px 7px;
+    padding: 10px 7px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1.5%;
 }
 
 .header_logo img, .profile-button img {
@@ -72,7 +74,6 @@ header {
     color: #bbb; /* Lightens the placeholder text */
 }
 
-/* This removes the webkit-specific cancel button that might appear in the search input */
 input[type="search"]::-webkit-search-cancel-button {
     display: none; 
 }
@@ -116,62 +117,117 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* MAIN */ 
-
 .main-content {
   display: flex;
   justify-content: center;
+  align-items: center;
+  color: #d7dadc;
   padding: 20px;
-  background-color: #333;
-  min-height: 100vh;
+  border-radius: 20px;
+
 }
 
 .create-post {
-  background-color: #222;
-  color: #ddd;
-  border-radius: 4px;
-  width: 600px; /* Adjust as needed */
+  width: 80%;
+  max-width: 800px;
+  background:#222;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #474747;
 }
 
 .create-post-header h1 {
-  margin-bottom: 20px;
+  text-align: center;
+    color: #ffffff;
+    border-bottom: 2px solid #616161; /* Приятная серая линия */
+    padding-bottom: 10px; /* Отступ от линии до текста */
+    margin-bottom: 20px; /* Отступ от линии до следующего элемента */
 }
 
-.post-form .form-section {
-  margin-bottom: 10px;
+select,
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px; /* Отступ сверху для поля ввода */
+    border: 1px solid #616161;
+    border-radius: 4px;
+    background: #1a1a1b;
+    color: #d7dadc;
 }
 
-.post-form label {
-  display: block;
-  margin-bottom: 5px;
+
+.form-section,
+.create-post-title,
+.create-post-text,
+.submit-section {
+    margin-bottom: 15px;
 }
 
-.post-form input[type="text"],
-.post-form select,
-.post-form textarea {
+.post-form {
+  background: #272729;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.post-category-select,
+.post-title-input,
+.post-textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #444;
-  border: 1px solid #555;
+  background-color: #1a1a1b;
+  border: 1px solid #343536;
   border-radius: 4px;
-  color: white;
+  color: #d7dadc;
+}
+input::placeholder,
+textarea::placeholder {
+    color: #d7dadc;
 }
 
-.post-form textarea {
-  height: 100px; /* Adjust as needed */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0079d3; /* Цвет кнопки */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.post-form button {
+.submit-button:hover {
+    background-color: #005f9c; /* Темный цвет при наведении */
+}
+
+.post-category-select {
+  height: 40px;
+}
+
+.post-title-input {
+  font-size: 1em;
+}
+
+.post-textarea {
+  height: 120px;
+  resize: none;
+}
+
+.create-post-footer {
+  text-align: right;
+}
+
+.post-submit-btn {
+  padding: 10px 20px;
   background-color: #0079d3;
   color: white;
   border: none;
-  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1em;
 }
 
-.post-form button:hover {
+.post-submit-btn:hover {
   background-color: #005999;
 }
